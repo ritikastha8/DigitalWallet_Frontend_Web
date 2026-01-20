@@ -1,5 +1,5 @@
 import RegisterForm from "../_components/RegisterForm";
-
+import { handleRegister } from "@/lib/actions/auth-action";
 export default function RegisterPage() {
     return (
         <div className="w-full max-w-md mx-auto">
