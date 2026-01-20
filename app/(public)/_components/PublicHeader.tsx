@@ -98,9 +98,10 @@
 //   );
 // }
 
-
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import ThemeToggle from "@/app/_components/ThemeToggle";
 
 export default function PublicHeader() {
   return (
@@ -133,6 +134,9 @@ export default function PublicHeader() {
             >
               Register
             </Link>
+
+            {/* Theme toggle added */}
+            <ThemeToggle/>
           </div>
 
         </div>
