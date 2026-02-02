@@ -36,3 +36,65 @@ export const login = async (loginData: LoginData)=>{
         );
     }
 }
+
+export const whoAmI = async () => {
+  try {
+    const response = await axios.get(API.AUTH.WHOAMI);
+    return response.data;
+  } catch (error: Error | any) {
+    throw new Error(error.response?.data?.message
+      || error.message || 'Whoami failed');
+  }
+}
+
+// export const updateProfile = async (profileData: FormData) => {
+//   try {
+//     const response = await axios.put(
+//       API.AUTH.UPDATEPROFILE,
+//       profileData,
+//       {
+//         headers: {
+//           'Content-Type': 'multipart/form-data', // for file upload/multer
+//         },
+//         withCredentials: true, // send cookies
+//       }
+//     );
+//     return response.data;
+//   } catch (error: Error | any) {
+//     throw new Error(error.response?.data?.message
+//       || error.message || 'Update profile failed');
+//   }
+// }
+
+
+export const updateProfile = async (formData: FormData) => {
+    try {
+        const response = await axios.put(
+            API.AUTH.UPDATEPROFILE, 
+            formData, 
+            { 
+                headers: { 
+                    // Axios automatically sets the boundary for FormData
+                    'Content-Type': 'multipart/form-data' 
+                },
+                // If you are using cookies for sessions:
+                withCredentials: true 
+            }
+        );
+        
+        return {
+            success: true,
+            data: response.data.user || response.data, // adjust based on your backend structure
+            message: response.data.message || "Profile updated successfully"
+        };
+    }
+    catch (err: any) {
+        // Log the actual error for debugging
+        console.error("Axios Update Error:", err.response?.data || err.message);
+        
+        return {
+            success: false,
+            message: err.response?.data?.message || err.message || "Profile update failed"
+        };
+    };
+}
