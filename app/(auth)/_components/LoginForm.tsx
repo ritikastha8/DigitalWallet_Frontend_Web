@@ -92,8 +92,12 @@ import { useRouter } from "next/navigation";
 import { LoginData, loginSchema } from "../schema";
 import Link from "next/link";
 import { handleLogin } from "@/lib/actions/auth-action";
+import { useAuth } from "@/context/AuthContext";
+
+
 
 export default function LoginForm() {
+    const { setUser, setIsAuthenticated } = useAuth();
     const router = useRouter();
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginData>({
@@ -113,8 +117,20 @@ export default function LoginForm() {
                 if (!response.success) {
                     throw new Error(response.message);
                 }
-                if (response.success) {
-                    router.push("/user/dashboard");
+                if (response.success && response.data) {
+
+                    setUser(response.data); // ⚡ set the logged-in user
+                     setIsAuthenticated(true); // ⚡ mark as authenticated
+                    localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("userId", response.data._id);
+
+                    if (response.data?.role == 'admin') {
+                        return router.replace("/admin");
+                    }
+                    if (response.data?.role === 'user') {
+                        return router.replace("/user/dashboard");
+                    }
+                    return router.replace("/");
                 } else {
                     setError('Login failed');
                 }
