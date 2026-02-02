@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getAuthToken } from "../cookie";
 import { headers } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5050";
@@ -9,6 +10,17 @@ const axiosInstance = axios.create(
         headers:{
             'Content-Type' : 'application/json',
         }
+    });
+axiosInstance.interceptors.request.use(
+    async (config) => {
+        const token = await getAuthToken();
+        if (token) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
     }
 );
 
