@@ -1,7 +1,8 @@
 "use client";
 
 import ThemeToggle from "@/app/_components/ThemeToggle";
-import { handleLogout } from "@/lib/actions/auth-action";
+import { handleLogout } from "@/lib/actions/users/auth-action";
+// import { handleLogout } from "@/lib/actions/auth-action";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -27,7 +28,7 @@ export default function Header() {
                             {/* <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-foreground text-background font-semibold">
                                 M
                             </span> */}
-                            <span className="text-base font-semibold tracking-tight group-hover:opacity-80 transition-opacity">
+                            <span className="text-2xl text-[#D07522] font-inter font-semibold tracking-tight group-hover:opacity-80 transition-opacity">
                                 Admin Panel
                             </span>
                         </Link>

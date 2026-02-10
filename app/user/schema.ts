@@ -8,7 +8,7 @@ export const updateUserSchema = z.object({
         .string()
         .regex(/^\d{10}$/, { message: "Mobile number must be exactly 10 digits" })
         ,
-    imageUrl: z
+    profilePhoto: z
         .instanceof(File)
         .optional()
         .refine((file) => !file || file.size <= MAX_FILE_SIZE, {

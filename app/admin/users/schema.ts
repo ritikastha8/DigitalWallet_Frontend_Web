@@ -40,9 +40,10 @@ export const UserSchema = z.object({
     .string()
     .length(10, "Mobile number must be exactly 10 digits")
     .regex(/^[0-9]+$/, "Only numbers are allowed"),
-      password: z.string().min(6, { message: "Minimum 6 characters" }),
-    confirmPassword: z.string().min(6, { message: "Minimum 6 characters" }),
-  image: z
+  email: z.string().email("Enter a valid email"),
+  password: z.string().min(6, { message: "Minimum 6 characters" }),
+  confirmPassword: z.string().min(6, { message: "Minimum 6 characters" }),
+  profilePhoto: z
     .instanceof(File)
     .optional()
     .refine((file) => !file || file.size <= MAX_FILE_SIZE, {
@@ -51,10 +52,12 @@ export const UserSchema = z.object({
     .refine((file) => !file || ACCEPTED_IMAGE_TYPES.includes(file.type), {
       message: "Only .jpg, .jpeg, .png formats are supported",
     }),
+    role: z.enum(["user", "admin"]).optional()
+
 });
 
 export type UserData = z.infer<typeof UserSchema>;
 
-// ✏️ Edit user (partial update)
+// Edit user (partial update)
 export const UserEditSchema = UserSchema.partial();
 export type UserEditData = z.infer<typeof UserEditSchema>;

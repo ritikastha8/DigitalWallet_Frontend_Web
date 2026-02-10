@@ -8,6 +8,13 @@ import Image from "next/image";
 const ADMIN_LINKS = [
     { href: "/admin", label: "Dashboard" },
     { href: "/admin/users", label: "Users" },
+    { href: "/admin/users/create", label: "Add Users" },
+    { href: "/admin/notifications", label: "Notifications" },
+    { href: "/admin/notifications/create", label: "Add Notifications" },
+    { href: "/admin/termsconditions", label: "Terms Condition" },
+    { href: "/admin/termsconditions/create", label: "Add Terms Condition" },
+    { href: "/admin/landingpages", label: "Landing Pages" },
+    { href: "/admin/landingpages/create", label: "Add Landing Page " },
 ];
 
 export default function Sidebar() {
@@ -28,17 +35,19 @@ export default function Sidebar() {
             >
                 <div className="p-4 border-b border-gray-200 dark:border-gray-800">
                     <Link href="/admin" className="flex items-center gap-2">
-                        <div className="h-8 w-8 rounded bg-gray-900 dark:bg-white text-white dark:text-gray-900 flex items-center justify-center font-bold">A</div>
-                        {/* <Image
+                        <Image
                         src="/images/logonovacash.png"
                          alt="NovaCash"
                           width={28}
                           height={28}
                           className="rounded"
-                          /> */}
+                          />
 
-                        <span className="font-semibold">NovaCash</span>
+                        <span className="font-sans text-black font-semibold text-xl" style={{ fontFamily: 'Nunito Sans' }}>NovaCash</span>
                     </Link>
+
+
+                    
                 </div>
 
                 <nav className="p-2 space-y-1">
@@ -48,12 +57,14 @@ export default function Sidebar() {
                                 key={link.href}
                                 href={link.href}
                                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(link.href)
-                                    ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                                    ? 'bg-[#F4AE6F] dark:bg-white text-black dark:text-gray-900'
                                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                                     }`}
                             >
                                 <span>{link.label}</span>
                             </Link >
+
+                            
                         ))
                     }
                 </nav >

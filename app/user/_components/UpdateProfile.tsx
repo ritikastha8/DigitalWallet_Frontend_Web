@@ -431,8 +431,9 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation"; // 🔹 for redirect/back
-import { handleUpdateProfile } from "@/lib/actions/auth-action";
+
 import { UpdateUserData, updateUserSchema } from "../schema";
+import { handleUpdateProfile } from "@/lib/actions/users/auth-action";
 
 export default function UpdateUserForm({ user }: { user: any }) {
 
@@ -479,7 +480,7 @@ export default function UpdateUserForm({ user }: { user: any }) {
       formData.append('name', data.name);
       formData.append('mobileNumber', data.mobileNumber);
 
-      if (data.imageUrl) formData.append('profilePhoto', data.imageUrl);
+      if (data.profilePhoto) formData.append('profilePhoto', data.profilePhoto);
 
       const response = await handleUpdateProfile(formData);
       if (!response.success) throw new Error(response.message || "Update profile failed");
@@ -487,10 +488,10 @@ export default function UpdateUserForm({ user }: { user: any }) {
       handleDismissImage();
       toast.success("Profile updated successfully");
 
-      // 🔹 Update user context with new data
+      // Update user context with new data
       setUser(response.data);
 
-      // 🔹 Redirect to dashboard after update
+      //  Redirect to dashboard after update
       router.push("/user/dashboard");
 
     } catch (err: any) {
@@ -502,7 +503,7 @@ export default function UpdateUserForm({ user }: { user: any }) {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4 flex items-center gap-4">
-        {/* 🔹 Back button */}
+        {/* Back button */}
         <button
           onClick={() => router.push("/user/dashboard")}
           className="px-2 py-1 bg-gray-300 rounded hover:bg-gray-400"
@@ -518,7 +519,7 @@ export default function UpdateUserForm({ user }: { user: any }) {
         {/* Profile Image */}
         <div className="mb-4">
           <Controller
-            name="imageUrl"
+            name="profilePhoto"
             control={control}
             render={({ field: { onChange } }) => (
               <div className="flex flex-col items-center gap-2">
@@ -559,8 +560,8 @@ export default function UpdateUserForm({ user }: { user: any }) {
                   accept=".jpg,.jpeg,.png,.webp"
                   className="mt-1"
                 />
-                {errors.imageUrl && (
-                  <p className="text-sm text-red-600">{errors.imageUrl.message}</p>
+                {errors.profilePhoto && (
+                  <p className="text-sm text-red-600">{errors.profilePhoto.message}</p>
                 )}
               </div>
             )}

@@ -92,8 +92,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { RegisterData, registerSchema } from "../schema";
-import { handleRegister } from "@/lib/actions/auth-action";
+
 import Link from "next/link";
+import { handleRegister } from "@/lib/actions/users/auth-action";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -150,12 +151,32 @@ export default function RegisterForm() {
         <input
           id="mobileNumber"
           type="tel"
+          inputMode="numeric"
+          maxLength={10}
           autoComplete="tel"
           placeholder="Enter your mobile number"
           className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
           {...register("mobileNumber")}
+          onInput={(e)=>{
+            e.currentTarget.value = e.currentTarget.value.replace(/\D/g,"");
+          }}
         />
         {errors.mobileNumber && <p className="text-xs text-red-600">{errors.mobileNumber.message}</p>}
+      </div>
+
+
+       {/* Email Address */}
+      <div className="space-y-1">
+        <label className="text-sm font-medium" htmlFor="email">Email Address</label>
+        <input
+          id="email"
+          type="email"
+          autoComplete="email"
+          placeholder="Enter your email address"
+          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
+          {...register("email")}
+        />
+        {errors.email && <p className="text-xs text-red-600">{errors.email.message}</p>}
       </div>
 
       {/* Password */}

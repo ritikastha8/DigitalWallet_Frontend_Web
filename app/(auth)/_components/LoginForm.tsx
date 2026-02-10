@@ -91,8 +91,9 @@ import { useTransition, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LoginData, loginSchema } from "../schema";
 import Link from "next/link";
-import { handleLogin } from "@/lib/actions/auth-action";
+
 import { useAuth } from "@/context/AuthContext";
+import { handleLogin } from "@/lib/actions/users/auth-action";
 
 
 
@@ -119,8 +120,8 @@ export default function LoginForm() {
                 }
                 if (response.success && response.data) {
 
-                    setUser(response.data); // ⚡ set the logged-in user
-                     setIsAuthenticated(true); // ⚡ mark as authenticated
+                    setUser(response.data); //  set the logged-in user
+                     setIsAuthenticated(true); // mark as authenticated
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("userId", response.data._id);
 
@@ -176,7 +177,22 @@ export default function LoginForm() {
                 {errors.password && (
                     <p className="text-xs text-red-600">{errors.password.message}</p>
                 )}
+
+                 {/* Forgot Password Link */}
+                  <div className="mt-1 text-right text-sm">
+                    <Link href="/forget-password" className="font-semibold text-[#D07522] hover:underline">
+                     Forgot Password?
+                     </Link>
+                     </div>
+                      {/* Forgot Password Link
+                      <div className="text-center">
+                      <Link href="/forget-password" className="text-sm text-[#D07522] hover:underline">
+                      Forgot Password?
+                      </Link>
+                      </div> */}
             </div>
+
+           
 
             {/* Submit Button */}
             <button
@@ -194,6 +210,8 @@ export default function LoginForm() {
                     Sign Up
                 </Link>
             </p>
+
+            
         </form>
     );
 }
