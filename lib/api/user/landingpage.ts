@@ -1,24 +1,28 @@
-import axios from "axios";
+import axios from "../axios"; // your axios instance
 import { API } from "../endpoints";
 
-export const getAllLandingPage = async () => {
+export const getUserLandingPages = async (page: number = 1, size: number = 10) => {
   try {
-    const response = await axios.get(API.LANDINGPAGE.GET_ALL);
-    return response.data;
+    const response = await axios.get( API.USER.LANDINGPAGE.GET_ALL, {
+      params: { page, size },
+    });
+    return response.data; // { success: true, data: [...] }
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || error.message || 'Fetch terms conditions failed');
+    throw new Error(
+      error.response?.data?.message || error.message || "Failed to fetch landing pages"
+    );
   }
 };
+export const getUserLandingPageById = async (id: string) => {
+  try {
 
-export const getLandingPageForUserById = async (id: string) => {
-    try {
-        const response = await axios.get(
-            API.ADMIN.LANDINGPAGE.GET_ONE(id)
+    const response = await axios.get(
+            API.USER.LANDINGPAGE.GET_ONE(id)
         );
-        return response.data;
-    }
-    catch (error: Error | any) {
-        throw new Error(error.response?.data?.message
-            || error.message || 'Get landing page by id failed');
-    }
-}
+    return response.data;
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || error.message || "Failed to fetch landing pages"
+    );
+  }
+};

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { UserData,UserSchema } from "../schema";
 import { handleCreateUser } from "@/lib/actions/admin/user-action";
 import { useRouter } from "next/navigation";
+import { FiEye,FiEyeOff } from "react-icons/fi";
 
 export default function CreateUserForm() {
   const [pending, startTransition] = useTransition();
@@ -23,6 +24,9 @@ export default function CreateUserForm() {
 
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleImageChange = (
     file: File | undefined,
@@ -172,34 +176,48 @@ export default function CreateUserForm() {
       {errors.email && (
         <p className="text-red-600 text-sm">{errors.email.message}</p>
       )}
-
-      
-      
-
       {/* Password */}
-      <input
-        type="password"
-        placeholder="Password"
-        {...register("password")}
-        className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
-      />
-      {errors.password && (
-        <p className="text-red-600 text-sm">{errors.password.message}</p>
-      )}
+<div className="relative">
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Password"
+    {...register("password")}
+    className="h-10 w-full rounded-md border border-gray-300 px-3 pr-10 text-sm outline-none focus:border-[#D07522]"
+  />
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500"
+  >
+    {showPassword ? <FiEyeOff /> : <FiEye />}
+  </button>
+</div>
+{errors.password && (
+  <p className="text-red-600 text-sm">{errors.password.message}</p>
+)}
+
 
       {/* Confirm Password */}
-      <div className="space-y-1">
-        
-        <input
-          id="confirmPassword"
-          type="password"
-          autoComplete="new-password"
-          placeholder="Confirm your password"
-          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
-          {...register("confirmPassword")}
-        />
-        {errors.confirmPassword && <p className="text-xs text-red-600">{errors.confirmPassword.message}</p>}
-      </div>
+<div className="relative mt-2">
+  <input
+    id="confirmPassword"
+    type={showConfirmPassword ? "text" : "password"}
+    autoComplete="new-password"
+    placeholder="Confirm your password"
+    {...register("confirmPassword")}
+    className="h-10 w-full rounded-md border border-gray-300 px-3 pr-10 text-sm outline-none focus:border-[#D07522]"
+  />
+  <button
+    type="button"
+    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500"
+  >
+    {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
+  </button>
+</div>
+{errors.confirmPassword && (
+  <p className="text-xs text-red-600">{errors.confirmPassword.message}</p>
+)}
       <button
         type="submit"
         disabled={pending || isSubmitting}

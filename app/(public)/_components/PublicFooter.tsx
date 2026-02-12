@@ -51,6 +51,14 @@ export default function PublicFooter() {
           >
             REGISTER
           </Link>
+
+
+          <Link
+           href="/termsconditions"
+           className="text-xl font-medium text-white hover:text-[#F4AE6F] transition-colors whitespace-nowrap mt-4"
+           >Terms & Conditions
+           </Link>
+          
         </div>
 
       </div>

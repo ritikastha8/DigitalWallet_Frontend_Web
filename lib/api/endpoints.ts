@@ -3,32 +3,38 @@
  
 export const API ={
     AUTH:{
-        LOGIN:'/api/auth/login',
-        REGISTER:'/api/auth/register',
-        WHOAMI: '/api/auth/whoami',
-        UPDATEPROFILE: '/api/auth/upload-profile',
-        REQUEST_PASSWORD_RESET: '/api/auth/request-password-reset',
-        RESET_PASSWORD: (token: string) => `/api/auth/reset-password/${token}`,
-    },
-
-    USER: {
-        NOTIFICATION: {
-        GET_ALL: '/api/notifications/',
-        GET_ONE: (id: string) => `/api/notifications/${id}`,
+        LOGIN:'/api/user/auth/login',
+        REGISTER:'/api/user/auth/register',
+        WHOAMI: '/api/user/auth/whoami',
+        UPDATEPROFILE: '/api/user/auth/upload-profile',
+        REQUEST_PASSWORD_RESET: '/api/user/auth/request-password-reset',
+        RESET_PASSWORD: (token: string) => `/api/user/auth/reset-password/${token}`,
+        SET_PIN: '/api/user/auth/set-pin',
     },
     TERMSCONDITION: {
         GET_ALL: '/api/termsconditions/',
         GET_ONE: (id: string) => `/api/termsconditions/${id}`,
     },
+
+    USER: {
+        NOTIFICATION: {
+        GET_ALL: '/api/user/notifications/',
+        GET_ONE: (id: string) => `/api/user/notifications/${id}`,
+    },
+    TERMSCONDITION: {
+        GET_ALL: '/api/user/termsconditions/',
+        GET_ONE: (id: string) => `/api/user/termsconditions/${id}`,
+    },
     
     LANDINGPAGE: {
-        GET_ALL: '/api/landingpages/',
-        GET_ONE: (id: string) => `/api/landingpages/${id}`,
+        GET_ALL: '/api/user/landingpages/',
+        GET_ONE: (id: string) => `/api/user/landingpages/${id}`,
     }
     },
+    
     LANDINGPAGE: {
-        GET_ALL: '/api/landingpages/',
-        GET_ONE: (id: string) => `/api/landingpages/${id}`,
+        GET_ALL: '/api/user/landingpages/',
+        GET_ONE: (id: string) => `/api/user/landingpages/${id}`,
     },
 
 

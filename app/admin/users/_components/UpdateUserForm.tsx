@@ -47,7 +47,6 @@ export default function UpdateUserForm(
             fileInputRef.current.value = '';
         }
     };
-
     const onSubmit = async (data: Partial<UserData>) => {
         setError(null);
         startTransition(async () => {
@@ -183,25 +182,12 @@ export default function UpdateUserForm(
                         <p className="text-xs text-red-600">{errors.name.message}</p>
                     )}
                 </div>
- {/* Mobile
-      <input
-        type="text"
-        inputMode="numeric"
-        placeholder="Mobile Number"
-        {...register("mobileNumber")}
-        className="h-10 w-full rounded-md border px-3"
-      />
-      {errors.mobileNumber && (
-        <p className="text-red-600 text-sm">{errors.mobileNumber.message}</p>
-      )} */}
                 <div className="space-y-1">
                     <label className="text-sm font-medium" htmlFor="mobileNumber">Mobile Number</label>
                     <input
                         id="mobileNumber"
                         type="text"
                         autoComplete="numeric"
-                        // className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-foreground/40"
-                        // className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
                         className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-[#D07522]"
 
                         {...register("mobileNumber")}
@@ -219,9 +205,6 @@ export default function UpdateUserForm(
                     id="email"
                     type="email"
                     autoComplete="email"
-                    // className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-foreground/40"
-                    // className="h-10 w-full rounded-md border border-black/10 bg-background px-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-100"
-                    // className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
                     className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-[#D07522]"
 
                     {...register("email")}
@@ -238,7 +221,7 @@ export default function UpdateUserForm(
     id="role"
     {...register("role")}
     defaultValue={user.role || "user"} // Pre-fill current role, default to "user"
-    // className="w-full border border-gray-300 rounded px-3 py-2"
+
     className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-[#D07522]"
     // className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
   >
@@ -258,11 +241,6 @@ export default function UpdateUserForm(
             >
                 {isSubmitting || pending ? "Updating account..." : "Update account"}
             </button>
-
-
-            {/* <Link href="/admin/users/" className="text-[#D07522] font-semibold hover:underline">
-                    Create User
-                </Link> */}
         </form>
         </div>
         </div>

@@ -23,7 +23,7 @@ const ForgetPasswordForm = () => {
             try {
                 const result = await handleRequestPasswordReset(values.email);
                 if (result.success) {
-                    toast.success("If the email is registered, a reset link has been sent.");
+                    toast.success("A reset link has been sent.");
                     return router.push('/login');
                 }else{
                     throw new Error(result.message || 'Failed to send reset link');

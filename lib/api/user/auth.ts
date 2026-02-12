@@ -1,6 +1,6 @@
 // API Layer
 // Call api from backend
-import { LoginData, RegisterData } from "@/app/(auth)/schema"
+import { LoginData, RegisterData, RegisterPinData } from "@/app/(auth)/schema"
  
 import { API } from "../endpoints";
 import axios from "../axios"; // IMPORTANT: "./axios" not "axios"
@@ -22,6 +22,21 @@ export const register = async (registerData: RegisterData) =>{
         );
     }
 }
+
+export const setPin = async (pinData: RegisterPinData) => {
+  try {
+    const response = await axios.post(
+      API.AUTH.SET_PIN,
+      { pin: pinData.pin }, // only send pin to backend
+      { withCredentials: true } // if using cookies
+    );
+    return response.data;
+  } catch (err: any) {
+    throw new Error(
+      err.response?.data?.message || err.message || "Failed to set PIN"
+    );
+  }
+};
 export const login = async (loginData: LoginData)=>{
      try{
         const response = await axios.post(
@@ -48,27 +63,6 @@ export const whoAmI = async () => {
       || error.message || 'Whoami failed');
   }
 }
-
-// export const updateProfile = async (profileData: FormData) => {
-//   try {
-//     const response = await axios.put(
-//       API.AUTH.UPDATEPROFILE,
-//       profileData,
-//       {
-//         headers: {
-//           'Content-Type': 'multipart/form-data', // for file upload/multer
-//         },
-//         withCredentials: true, // send cookies
-//       }
-//     );
-//     return response.data;
-//   } catch (error: Error | any) {
-//     throw new Error(error.response?.data?.message
-//       || error.message || 'Update profile failed');
-//   }
-// }
-
-
 export const updateProfile = async (formData: FormData) => {
     try {
         const response = await axios.put(

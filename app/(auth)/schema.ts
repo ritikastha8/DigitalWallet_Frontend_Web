@@ -18,17 +18,32 @@ export const registerSchema = z
       .min(10, "Mobile number must be at least 10 digits")
       .regex(/^[0-9]+$/, "Only numbers are allowed"),
     email: z.email( "Enter a valid email address"),
+    terms: z.boolean().refine(val => val === true, "You must accept the terms and conditions"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string().min(6),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
+    
+    
   });
 
 export type RegisterData = z.infer<typeof registerSchema>;
 
 
+export const registerPinSchema = z.object({
+  pin: z
+    .string()
+    .length(4, "PIN must be exactly 4 digits")
+    .regex(/^[0-9]+$/, "PIN must contain only numbers"),
+  confirmPin: z.string(),
+}).refine((data) => data.pin === data.confirmPin, {
+  message: "PINs do not match",
+  path: ["confirmPin"],
+});
+
+export type RegisterPinData = z.infer<typeof registerPinSchema>;
 export const forgetPasswordSchema = z.object({
     email: z.email({ message: "Enter a valid email" }),
 });

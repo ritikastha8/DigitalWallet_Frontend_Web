@@ -1,6 +1,7 @@
+"use client";
 import LoginForm from "../_components/LoginForm";
 
-export default function LoginPage() {
+export default function LoginPage({ params }: { params: any }) {
     return (
         <div className="w-full max-w-md mx-auto">
             <div className="text-center mb-6">

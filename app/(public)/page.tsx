@@ -1,47 +1,67 @@
-// export default function HomePage() {
-//   return (
-//     <div className="h-[400px] flex items-center justify-center text-gray-400">
-//       Home Page Content (Dummy)
-//     </div>
-//   );
-// }
+"use client";
+import { getUserLandingPages } from "@/lib/api/user/landingpage";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
+export default function LandingPageUser() {
+  const [landingPages, setLandingPages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-// import Image from "next/image";
+  useEffect(() => {
+    const fetchLandingPages = async () => {
+      try {
+        const res = await getUserLandingPages(1, 20);
+        if (res.success) {
+          setLandingPages(res.data.landingPages || []);
+        } else {
+          setError(res.message || "Failed to fetch landing pages");
+        }
+      } catch (err: any) {
+        setError(err.message || "Failed to fetch landing pages");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-// export default function Home() {
-//   return (
-//     <section className="grid md:grid-cols-2 gap-10 items-center">
-      
-//       <div>
-//         <h1 className="text-3xl font-bold mb-4">
-//           Welcome to NovaCash
-//         </h1>
-//         <p className="text-foreground/70 mb-6">
-//           Send, receive, and manage your money easily with NovaCash.
-//         </p>
-//       </div>
+    fetchLandingPages();
+  }, []);
 
-//       <div>
-//         <Image
-//           src="/digitalwalletlogin.png"
-//           alt="Digital Wallet"
-//           width={500}
-//           height={400}
-//           className="mx-auto"
-//         />
-//       </div>
+  if (loading) return <p className="p-6">Loading landing pages...</p>;
+  if (error) return <p className="p-6 text-red-500">{error}</p>;
 
-//     </section>
-//   );
-// }
-
-
-export default function HomePage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-20">
-      {/* Empty section as per design */}
+    <div className="pb-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-6 p-8 ">
+    {landingPages.map((n) => (
+    <div
+      key={n._id}
+      className="bg-white border p-4 rounded"
+    >
+      {/* INNER GREY CARD */}
+      <div className="bg-gray-100 rounded-xl p-4 flex gap-4 items-center">
+        {/* Image */}
+        {n.imageLandpageurl && (
+          <img
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${n.imageLandpageurl}`}
+            alt={n.heading}
+            className="w-28 h-28 object-cover rounded-lg flex-shrink-0"
+          />
+        )}
+
+        {/* Text */}
+        <div>
+          <h2 className="font-semibold text-lg mb-2">
+            {n.heading}
+          </h2>
+          <p className="text-sm text-gray-700 leading-relaxed line-clamp-4">
+            {n.describe}
+          </p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 }
-

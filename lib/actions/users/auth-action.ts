@@ -1,12 +1,9 @@
 // server side processing of auth axtions
 "use server";
-import { success } from "zod";
-// import { setAuthToken,setUserData,clearAuthCookies } from "../cookie";
-// import {register,login,whoAmI,updateProfile, resetPassword, requestPasswordReset} from "../api/auth";
-import { LoginData, RegisterData } from "@/app/(auth)/schema"
+import { LoginData, RegisterData, RegisterPinData } from "@/app/(auth)/schema"
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { login, register, requestPasswordReset, resetPassword, updateProfile, whoAmI } from "@/lib/api/user/auth";
+import { login, register, requestPasswordReset, resetPassword, setPin, updateProfile, whoAmI } from "@/lib/api/user/auth";
 import { clearAuthCookies, setAuthToken, setUserData } from "@/lib/cookie";
 
 export const handleRegister = async (data: RegisterData ) =>{
@@ -28,6 +25,25 @@ export const handleRegister = async (data: RegisterData ) =>{
         return {success:false,message:err.message || "Registration failed"};
     }
 }
+
+export const handleRegisterPin = async (data: RegisterPinData) => {
+  try {
+    const result = await setPin(data);
+    if (result.success) {
+      return {
+        success: true,
+        message: "PIN set successfully",
+        data: result.data,
+      };
+    }
+    return {
+      success: false,
+      message: result.message || "Failed to set PIN",
+    };
+  } catch (error: any) {
+    return { success: false, message: error.message || "PIN setup failed" };
+  }
+};
 export const handleLogin = async (data: LoginData) =>{
      try{
         // how to get data from component

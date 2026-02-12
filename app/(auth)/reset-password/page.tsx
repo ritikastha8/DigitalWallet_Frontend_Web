@@ -1,6 +1,4 @@
 import ResetPasswordForm from "../_components/ResetPasswordForm";
-
-
 export default async function Page({
     searchParams
 }: {
@@ -19,17 +17,5 @@ export default async function Page({
             <p className="text-sm text-gray-500 mt-1">Enter your new password</p>
             </div>
             <ResetPasswordForm token={token} />
-        </div>
-
-            // <div className="w-full max-w-md mx-auto">
-            //         <div className="text-center mb-6">
-            //             <h1 className="text-2xl font-bold text-[#D07522]">Log In</h1>
-            //             <p className="text-sm text-gray-500 mt-1">Sign in to your account</p>
-            //         </div>
-            //         <LoginForm />
-            //     </div>
-
-
-
-    );
+        </div>);
 }

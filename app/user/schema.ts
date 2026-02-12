@@ -2,6 +2,7 @@ import { z } from "zod";
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
+
 export const updateUserSchema = z.object({
     name: z.string().min(2, { message: "Minimum 2 characters" }),
     mobileNumber:  z
@@ -20,3 +21,6 @@ export const updateUserSchema = z.object({
 });
 
 export type UpdateUserData = z.infer<typeof updateUserSchema>;
+
+
+
