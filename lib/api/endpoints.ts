@@ -17,6 +17,15 @@ export const API ={
     },
 
     USER: {
+        WALLET: {
+            LOAD: "/api/user/wallet/load",
+            LINK_BANK: "/api/user/wallet/link-bank",
+            LOGIN_BANK: "/api/user/wallet/loginbank",
+            INFO: "/api/user/wallet/info",
+            TRANSFER:"/api/user/wallet/transfer",
+            TOPUP:"/api/user/wallet/topup",
+            TRANSACTION:"/api/user/transactions/my-transactions"
+    },
         NOTIFICATION: {
         GET_ALL: '/api/user/notifications/',
         GET_ONE: (id: string) => `/api/user/notifications/${id}`,
@@ -29,7 +38,8 @@ export const API ={
     LANDINGPAGE: {
         GET_ALL: '/api/user/landingpages/',
         GET_ONE: (id: string) => `/api/user/landingpages/${id}`,
-    }
+    },
+    
     },
     
     LANDINGPAGE: {
