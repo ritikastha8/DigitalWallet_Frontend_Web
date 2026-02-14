@@ -31,14 +31,7 @@ export default function CreateTermsConditionForm() {
     console.log("Form data:", data); 
     startTransition(async () => {
       try {
-        // const formData = new FormData();
-
-        // formData.append("title", data.title);
-        // formData.append("description", data.description);
-
-        // const response = await handleCreateTermsCondition(formData);
-
-        //   const response = await handleCreateTermsCondition(data);
+      
         const response = await handleCreateTermsCondition({
   title: data.title,
   description: data.description,
@@ -79,13 +72,6 @@ export default function CreateTermsConditionForm() {
       />
       {errors.title && <p className="text-red-600 text-sm">{errors.title.message}</p>}
 
-    {/* Message */}
-      {/* <input
-        type="text"
-        placeholder="Message"
-        {...register("description")}
-        className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-[#D07522]"
-      /> */}
       <textarea
   placeholder="Message"
   {...register("description")}

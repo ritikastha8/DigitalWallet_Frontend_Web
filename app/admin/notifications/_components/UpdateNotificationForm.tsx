@@ -26,13 +26,7 @@ export default function UpdateNotificationForm(
         setError(null);
         startTransition(async () => {
             try {
-                // const formData = new FormData();
-                // if (data.title) {
-                //     formData.append('title', data.title);
-                // }
-                // if (data.messageNotification) {
-                //     formData.append('messageNotification', data.messageNotification);
-                // }
+            
              
                 const response = await handleUpdateNotification(notification._id, {
           title: data.title || '',
@@ -40,7 +34,7 @@ export default function UpdateNotificationForm(
         });
 
                 if (!response.success) {
-                    throw new Error(response.message || 'Update profile failed');
+                    throw new Error(response.message || 'Update notifications failed');
                 }
                 reset();
                 router.push("/admin/notifications"); 
@@ -87,24 +81,6 @@ export default function UpdateNotificationForm(
                     )}
                 </div>
 
-                {/* <div className="space-y-1">
-                    <label className="text-sm font-medium" htmlFor="messageNotification">Message Notification</label>
-                    <textarea
-                        id="messageNotification"
-                        // className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-foreground/40"
-                        className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-[#D07522]"
-                        onInput={(e) => {
-                            const target = e.target as HTMLTextAreaElement;
-                            target.style.height = "auto"; // reset height
-                            target.style.height = target.scrollHeight + "px"; // set to scrollHeight
-                            }}
-                        {...register("messageNotification")}
-
-                    />
-                    {errors.messageNotification?.message && (
-                        <p className="text-xs text-red-600">{errors.messageNotification.message}</p>
-                    )}
-                </div> */}
                 <div className="space-y-1">
   <label className="text-sm font-medium" htmlFor="messageNotification">Message Notification</label>
   <textarea

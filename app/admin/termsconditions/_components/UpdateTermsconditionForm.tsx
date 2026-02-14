@@ -3,8 +3,6 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState, useTransition } from "react";
 import { toast } from "react-toastify";
-// import { TermsConditionData, TermsConditionSchema } from "../schema";
-// import { handleUpdateTermsCondition } from "@/lib/actions/admin/termsCondition-action";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { TermsConditionData, TermsConditionSchema } from "../schema";
@@ -28,21 +26,14 @@ export default function UpdateTermsConditionForm(
         setError(null);
         startTransition(async () => {
             try {
-                // const formData = new FormData();
-                // if (data.title) {
-                //     formData.append('title', data.title);
-                // }
-                // if (data.description) {
-                //     formData.append('description', data.description);
-                // }
-             
+   
                 const response = await handleUpdateTermsCondition(termsconditions._id, {
           title: data.title || '',
           description: data.description || '',
         });
 
                 if (!response.success) {
-                    throw new Error(response.message || 'Update profile failed');
+                    throw new Error(response.message || 'Update terms condition failed');
                 }
                 reset();
                 router.push("/admin/termsconditions"); 
@@ -89,24 +80,7 @@ export default function UpdateTermsConditionForm(
                     )}
                 </div>
 
-                {/* <div className="space-y-1">
-                    <label className="text-sm font-medium" htmlFor="description">Description</label>
-                    <textarea
-                        id="description"
-                        // className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-foreground/40"
-                        className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-[#D07522]"
-                        onInput={(e) => {
-                            const target = e.target as HTMLTextAreaElement;
-                            target.style.height = "auto"; // reset height
-                            target.style.height = target.scrollHeight + "px"; // set to scrollHeight
-                            }}
-                        {...register("description")}
-
-                    />
-                    {errors.description?.message && (
-                        <p className="text-xs text-red-600">{errors.description.message}</p>
-                    )}
-                </div> */}
+            
                  <div className="space-y-1">
   <label className="text-sm font-medium" htmlFor="description">Description</label>
   <textarea

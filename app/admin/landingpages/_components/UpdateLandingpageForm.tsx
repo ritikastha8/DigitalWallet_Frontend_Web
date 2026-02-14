@@ -172,41 +172,6 @@ export default function UpdateLandingPageForm(
                     )}
                 </div>
 
-                {/* <div className="space-y-1">
-                    <label className="text-sm font-medium" htmlFor="describe">Description</label>
-                    <input
-                        id="describe"
-                        type="text"
-                        // className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-foreground/40"
-                        className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-[#D07522]"
-                        {...register("describe")}
-                        placeholder="Enter Landing Page description"
-                    />
-                    {errors.describe?.message && (
-                        <p className="text-xs text-red-600">{errors.describe.message}</p>
-                    )}
-                </div> */}
-
-                {/* <div className="space-y-1">
-                    <label className="text-sm font-medium" htmlFor="describe">Description</label>
-                    <textarea
-                        id="describe"
-                        // className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-foreground/40"
-                        className="h-10 w-full rounded-md border border-black/10 dark:border-white/15 bg-background px-3 text-sm outline-none focus:border-[#D07522]"
-                        onInput={(e) => {
-                            const target = e.target as HTMLTextAreaElement;
-                            target.style.height = "auto"; // reset height
-                            target.style.height = target.scrollHeight + "px"; // set to scrollHeight
-                            }}
-                        {...register("describe")}
-
-                    />
-                    {errors.describe?.message && (
-                        <p className="text-xs text-red-600">{errors.describe.message}</p>
-                    )}
-                </div> */}
-
-
                 <div className="space-y-1">
   <label className="text-sm font-medium" htmlFor="describe">Description</label>
   <textarea
@@ -221,17 +186,7 @@ export default function UpdateLandingPageForm(
 </div>
 
 
- {/* Mobile
-      <input
-        type="text"
-        inputMode="numeric"
-        placeholder="Mobile Number"
-        {...register("mobileNumber")}
-        className="h-10 w-full rounded-md border px-3"
-      />
-      {errors.mobileNumber && (
-        <p className="text-red-600 text-sm">{errors.mobileNumber.message}</p>
-      )} */}
+
                 
             
 

@@ -98,15 +98,6 @@ const LandingPageTable = ({ landingpages, pagination, search }: { landingpages: 
 
       </div>
 
-      {/* Delete Modal */}
-      {/* <DeleteModal
-        isOpen={deleteId}
-        onClose={() => setDeleteId(null)}
-        onConfirm={onDelete}
-        title="Delete Confirmation"
-        description="Are you sure you want to delete this landingpage? This action cannot be undone."
-      /> */}
-
       <DeleteModal
                 isOpen={deleteId !== null}
               onClose={() => setDeleteId(null)}

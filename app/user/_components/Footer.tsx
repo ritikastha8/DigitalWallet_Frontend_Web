@@ -36,22 +36,7 @@ export default function Footer() {
           <p className="mt-1">Contact: +9779839264194</p>
         </div>
 
-        {/* RIGHT COLUMN – Auth Buttons */}
-        {/* <div className="flex flex-col gap-4 w-36 md:justify-self-end">
-          <Link
-            href="/login"
-            className="rounded bg-white text-black text-center py-2 text-sm"
-          >
-            LOGIN
-          </Link>
-
-          <Link
-            href="/register"
-            className="rounded bg-[#EC9444] text-white text-center py-2 text-sm"
-          >
-            REGISTER
-          </Link>
-        </div> */}
+      
 
       </div>
     </footer>

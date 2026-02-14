@@ -1,17 +1,3 @@
-// export default async function Page({
-//     params
-// }: {
-//     params: Promise<{ id: string }>;
-// }) {
-//     const { id } = await params;
-//     return (
-//         <div>
-//             Edit: {id}
-//         </div>
-//     );
-// }
-
-
 import { handleGetOneUser } from "@/lib/actions/admin/user-action";
 import UpdateUserForm from "../../_components/UpdateUserForm";
 

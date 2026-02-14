@@ -31,14 +31,6 @@ export default function CreateNotificationForm() {
     console.log("Form data:", data); 
     startTransition(async () => {
       try {
-        // const formData = new FormData();
-
-        // formData.append("title", data.title);
-        // formData.append("messageNotification", data.messageNotification);
-
-        // const response = await handleCreateNotification(formData);
-
-        //   const response = await handleCreateNotification(data);
 
         const response = await handleCreateNotification({
   title: data.title,

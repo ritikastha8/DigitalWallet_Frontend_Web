@@ -28,8 +28,7 @@ export default async function Page({
 
     return (
         <div>
-            {/* <Link className="text-gray-400 border border-gray-400 hover:bg-gray-100 p-2 rounded inline-block"
-                href="/admin/users/create">Create User</Link> */}
+          
             <TermsConditionTable termsconditions={response.data} pagination={response.pagination} search={search} />
         </div>
     );

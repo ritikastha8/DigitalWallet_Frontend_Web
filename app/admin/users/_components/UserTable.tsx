@@ -98,14 +98,7 @@ const UserTable = ({ users, pagination, search }: { users: any[], pagination: an
 
       </div>
 
-      {/* Delete Modal */}
-      {/* <DeleteModal
-        isOpen={deleteId}
-        onClose={() => setDeleteId(null)}
-        onConfirm={onDelete}
-        title="Delete Confirmation"
-        description="Are you sure you want to delete this user? This action cannot be undone."
-      /> */}
+    
 
       <DeleteModal
                 isOpen={deleteId !== null}
@@ -163,18 +156,7 @@ const UserTable = ({ users, pagination, search }: { users: any[], pagination: an
               <td className="px-4 py-2">{user.email}</td>
               <td className="px-4 py-2 capitalize">{user.role}</td>
               <td className="px-4 py-2 flex items-center gap-4">
-                {/* View */}
-                      {/* <Link href={`/admin/users/${user._id}`} className="text-green-500 hover:underline">View</Link>
-// // //                                 <Link href={`/admin/users/${user._id}/edit`} className="text-blue-500 ml-4 hover:underline">Edit</Link> */}
-                {/* <div className="flex flex-col items-center gap-1">
-                  <FiEye className="text-grey text-lg" />
-                  <span className="text-green-600 text-xs">View</span>
-                </div> */}
-                {/* Edit */}
-                {/* <div className="flex flex-col items-center gap-1">
-                  <FiEdit className="text-grey-100 text-lg" />
-                  <span className="text-blue-700 text-xs">Edit</span>
-                </div> */}
+                
 
                  {/* View */}
                  <Link href={`/admin/users/${user._id}`} className="flex flex-col items-center gap-1">

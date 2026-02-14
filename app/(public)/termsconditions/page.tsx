@@ -33,7 +33,7 @@ export default function TermsConditionsPage() {
 
   return (
       <div>
-            <Link href="/" className="text-gray-700 hover:underline text-xl p-4 inline-block ">&lt; Back</Link>
+    <Link href="/" className="text-gray-700 hover:underline text-xl p-4 inline-block ">Back</Link>
     <div className="max-w-5xl mx-auto p-2 text-center"> <h1 className="text-4xl font-semibold mb-4 text-[#d07522]" style={{ fontFamily: 'Nunito Sans' }}>Terms & Condition</h1></div>
     <div className="px-4 md:px-8 py-6">
     <p className="text-gray-600 text-base leading-relaxed max-w-4xl mx-auto mb-6">

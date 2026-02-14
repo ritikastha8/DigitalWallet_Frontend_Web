@@ -27,6 +27,6 @@ export const UserSchema = z.object({
 
 export type UserData = z.infer<typeof UserSchema>;
 
-// Edit user (partial update)
+// Edit user 
 export const UserEditSchema = UserSchema.partial();
 export type UserEditData = z.infer<typeof UserEditSchema>;

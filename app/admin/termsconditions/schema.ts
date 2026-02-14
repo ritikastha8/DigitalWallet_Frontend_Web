@@ -10,6 +10,6 @@ export const TermsConditionSchema = z.object({
 
 export type TermsConditionData = z.infer<typeof TermsConditionSchema>;
 
-// Edit TermsCondition (partial update)
+// Edit TermsCondition
 export const TermsConditionEditSchema = TermsConditionSchema.partial();
 export type TermsConditionEditData = z.infer<typeof TermsConditionEditSchema>;

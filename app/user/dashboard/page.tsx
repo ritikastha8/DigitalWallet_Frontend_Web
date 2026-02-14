@@ -1,6 +1,7 @@
 "use client";
 
 import { getUserLandingPages } from "@/lib/api/user/landingpage";
+import { getWalletInfo } from "@/lib/api/user/wallet";
 import { useEffect, useState } from "react";
 
 export default function LandingPageUser() {
@@ -8,8 +9,11 @@ export default function LandingPageUser() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [showBalance, setShowBalance] = useState(false);
+
+  const [walletBalance, setWalletBalance] = useState<number | null>(null); 
   useEffect(() => {
-    const fetchLandingPages = async () => {
+    const fetchData = async () => {
       try {
         const res = await getUserLandingPages(1, 20);
         if (res.success) {
@@ -17,25 +21,46 @@ export default function LandingPageUser() {
         } else {
           setError(res.message || "Failed to fetch landing pages");
         }
+        const walletRes = await getWalletInfo();
+        if (walletRes.success) {
+          setWalletBalance(walletRes.data?.balance ?? 0);
+        } else {
+          setError(walletRes.message || "Failed to fetch wallet balance");
+        }
+
       } catch (err: any) {
-        setError(err.message || "Failed to fetch landing pages");
+        setError(err.message || "Failed to fetch data");
       } finally {
         setLoading(false);
       }
-    };
 
-    fetchLandingPages();
+      
+    };
+    
+
+    fetchData();
   }, []);
 
   if (loading) return <p className="p-6">Loading landing pages...</p>;
   if (error) return <p className="p-6 text-red-500">{error}</p>;
 
   return (
+    <div className="max-w-7xl mx-auto px-6">
     <div className="pb-10">
 
-      
+       <div
+        className="p-6 font-semibold text-lg cursor-pointer select-none w-max"
+        onClick={() => setShowBalance(!showBalance)}
+        title="Click to reveal balance"
+      >
+        {/* Wallet balance: NPR {showBalance ? walletBalance : "XXXX"} */}
+        <span className="text-black">Wallet balance -  </span>
+  <span className="text-gray-500 font-medium text-sm">NPR </span>
+  <span className="text-[#D07522] font-medium text-lg">{showBalance ? walletBalance?.toFixed(2) : "XXXX.XX"}</span>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-6 p-8">
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-6 ">
   {landingPages.map((n) => (
     <div
       key={n._id}
@@ -65,6 +90,7 @@ export default function LandingPageUser() {
     </div>
   ))}
 </div>
+    </div>
     </div>
   );
 }
