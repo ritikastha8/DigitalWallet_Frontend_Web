@@ -35,6 +35,27 @@ export default function Footer() {
           <p className="mt-1">Ncell Toll Free – 18100123456</p>
           <p className="mt-1">Contact: +9779839264194</p>
         </div>
+        <div className="text-right">
+          {/* <Link
+          href="/user/dashboard/termsconditions"
+          className="text-lg font-semibold text-white hover:text-[#F4AE6F] transition-colors whitespace-nowrap"
+          >
+            Terms & Condition
+          </Link> */}
+
+          <Link
+            href="/user/dashboard/termsconditions"
+            className="rounded font-semibold bg-[#EC9444] text-white text-center  text-white hover:text-gray-500 transition-colors whitespace-nowrap py-3 px-2 text-lg"
+          >
+            Terms & Condition
+          </Link>
+           {/* <Link
+            href="/user/dashboard/termsconditions"
+            className="rounded font-semibold bg-white text-[#EC9444]  text-center  text-[#EC9444]  hover:text-gray-500 transition-colors whitespace-nowrap py-3 px-2 text-lg"
+          >
+            Terms & Condition
+          </Link> */}
+        </div>
 
       
 

@@ -2,20 +2,43 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  Users,
+  UserPlus,
+  Bell,
+  BellPlus,
+  FileText,
+  FilePlus,
+  Layout
+} from "lucide-react";
 
 import Image from "next/image";
 
+// const ADMIN_LINKS = [
+//     { href: "/admin", label: "Dashboard" },
+//     { href: "/admin/users", label: "Users" },
+//     { href: "/admin/users/create", label: "Add Users" },
+//     { href: "/admin/notifications", label: "Notifications" },
+//     { href: "/admin/notifications/create", label: "Add Notifications" },
+//     { href: "/admin/termsconditions", label: "Terms Condition" },
+//     { href: "/admin/termsconditions/create", label: "Add Terms Condition" },
+//     { href: "/admin/landingpages", label: "Landing Pages" },
+//     { href: "/admin/landingpages/create", label: "Add Landing Page " },
+// ];
+
 const ADMIN_LINKS = [
-    { href: "/admin", label: "Dashboard" },
-    { href: "/admin/users", label: "Users" },
-    { href: "/admin/users/create", label: "Add Users" },
-    { href: "/admin/notifications", label: "Notifications" },
-    { href: "/admin/notifications/create", label: "Add Notifications" },
-    { href: "/admin/termsconditions", label: "Terms Condition" },
-    { href: "/admin/termsconditions/create", label: "Add Terms Condition" },
-    { href: "/admin/landingpages", label: "Landing Pages" },
-    { href: "/admin/landingpages/create", label: "Add Landing Page " },
+  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/users", label: "Users", icon: Users },
+  { href: "/admin/users/create", label: "Add Users", icon: UserPlus },
+  { href: "/admin/notifications", label: "Notifications", icon: Bell },
+  { href: "/admin/notifications/create", label: "Add Notifications", icon: BellPlus },
+  { href: "/admin/termsconditions", label: "Terms Condition", icon: FileText },
+  { href: "/admin/termsconditions/create", label: "Add Terms Condition", icon: FilePlus },
+  { href: "/admin/landingpages", label: "Landing Pages", icon: Layout },
+  { href: "/admin/landingpages/create", label: "Add Landing Page", icon: FilePlus },
 ];
+
 
 export default function Sidebar() {
     const pathname = usePathname();
@@ -50,7 +73,7 @@ export default function Sidebar() {
                     
                 </div>
 
-                <nav className="p-2 space-y-1">
+                <nav className="p-6 space-y-1">
                     {
                         ADMIN_LINKS.map(link => (
                             <Link
@@ -61,7 +84,10 @@ export default function Sidebar() {
                                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                                     }`}
                             >
+                                {/* <span>{link.label}</span> */}
+                                <link.icon className="w-5 h-5 shrink-0" />
                                 <span>{link.label}</span>
+
                             </Link >
 
                             

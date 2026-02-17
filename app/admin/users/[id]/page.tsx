@@ -19,7 +19,7 @@ export default async function Page({
             <Link href={`/admin/users/${id}/edit`} className="text-green-600 hover:underline ml-4">Edit User</Link>
 
              <div className="p-4 flex items-center justify-between mt-6 mb-4">
-                <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>User Detail</h1>
+                <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>User Detail</h1>
             </div>
 
 
@@ -29,7 +29,7 @@ export default async function Page({
 
   {/* Profile Picture row */}
   <div className="flex items-center gap-4">
-    <strong className="text-gray-700 text-lg">Profile Picture:</strong>
+    <strong className="text-lg">Profile Picture:</strong>
     {response.data.imageUrl ? (
       <Image
         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${response.data.imageUrl}`}
@@ -46,22 +46,22 @@ export default async function Page({
   </div>
 
   {/* Name */}
-  <p className="text-gray-700 text-lg">
+  <p className="text-lg">
     <strong className="mr-2">Name:</strong> {response.data.name}
   </p>
 
   {/* Mobile Number */}
-  <p className="text-gray-700 text-lg">
+  <p className="text-lg">
     <strong className="mr-2">Mobile Number:</strong> {response.data.mobileNumber}
   </p>
 
   {/* Email */}
-  <p className="text-gray-700 text-lg">
+  <p className="text-lg">
     <strong className="mr-2">Email:</strong> {response.data.email}
   </p>
 
   {/* Role */}
-  <p className="text-gray-700 text-lg">
+  <p className="text-lg">
     <strong className="mr-2">Role:</strong> {response.data.role}
   </p>
 

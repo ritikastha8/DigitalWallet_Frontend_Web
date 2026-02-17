@@ -19,7 +19,7 @@ export default async function Page({
             <Link href={`/admin/landingpages/${id}/edit`} className="text-green-600 hover:underline ml-4">Edit Landing Page</Link>
 
              <div className="p-4 flex items-center justify-between mt-6 mb-4">
-                <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>Landing Page Detail</h1>
+                <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>Landing Page Detail</h1>
             </div>
 
 
@@ -101,7 +101,7 @@ export default async function Page({
 
   {/* Profile Picture row */}
   <div className="flex items-center gap-4">
-    <strong className="text-gray-700 text-lg">Landing Page Picture:</strong>
+    <strong className="text-lg">Landing Page Picture:</strong>
     {response.data.imageLandpageurl ? (
       <Image
         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${response.data.imageLandpageurl}`}
@@ -118,12 +118,12 @@ export default async function Page({
   </div>
 
    {/* Heading */}
-  <p className="text-gray-700 text-lg">
+  <p className="text-lg">
     <strong className="mr-2">Heading:</strong> {response.data.heading}
   </p>
 
    {/* Description */}
-  <p className="text-gray-700 text-lg">
+  <p className="text-lg">
     <strong className="mr-2">Description:</strong> {response.data.describe}
   </p>
 

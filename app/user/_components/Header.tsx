@@ -42,7 +42,7 @@ export default function Header() {
         )}
         <span className="text-sm text-white font-medium">{user.name}</span>
       </Link>
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
       </div>
       ) : (
       <div className="flex gap-3">
@@ -61,7 +61,7 @@ export default function Header() {
             </div>
           )}
           <Link
-          href="/user/termsconditions"
+          href="/user/dashboard/termsconditions"
           className="text-sm font-medium text-white hover:text-[#F4AE6F] transition-colors whitespace-nowrap"
           >
             Terms & Condition

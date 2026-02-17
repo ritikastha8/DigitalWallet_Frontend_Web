@@ -57,7 +57,7 @@ export default function UpdateNotificationForm(
         </div> 
            {/* Update LandingPages Title */}
       <div className="p-4 flex items-center justify-between">
-        <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
+        <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
           Update Notification 
         </h1>
 

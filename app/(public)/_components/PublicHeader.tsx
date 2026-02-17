@@ -26,6 +26,8 @@ export default function PublicHeader() {
 
           {/* Right side: Auth + Theme */}
           <div className="flex items-center gap-3">
+            <Link href="/termsconditions" className="text-sm font-medium text-white hover:text-[#F4AE6F] transition-colors whitespace-nowrap"> Terms & Condition </Link>
+
 
             {user ? (
               <>
@@ -55,8 +57,9 @@ export default function PublicHeader() {
                 </Link>
               </>
             )}
+             
 
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
 
         </div>

@@ -34,8 +34,8 @@ export default function NotificationsPage() {
   if (error) return <p className="p-4 text-red-500">{error}</p>;
 
   return (
-      <div>
-            <Link href="/user/dashboard" className="text-[#D07522] hover:underline text-xl p-8">&lt; Back</Link>
+      <div className="mt-4">
+            <Link href="/user/dashboard" className="text-[#D07522] hover:underline text-lg p-8"> Back to Homepage</Link>
     <div className="max-w-5xl mx-auto p-6 mt-4 "> <h1 className="text-4xl font-semibold mb-4  text-[#d07522] " style={{ fontFamily: 'Nunito Sans' }}>Your Notifications</h1>
     <div className="p-6 max-w-5xl mx-auto border bg-gray-100 mt-8">
       

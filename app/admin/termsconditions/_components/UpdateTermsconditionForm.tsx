@@ -56,7 +56,7 @@ export default function UpdateTermsConditionForm(
         </div>
                  {/* Update Terms and Condition Title */}
       <div className="p-4 flex items-center justify-between">
-        <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
+        <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
           Update Terms & Condition
         </h1>
 

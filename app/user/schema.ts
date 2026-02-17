@@ -16,7 +16,7 @@ export const updateUserSchema = z.object({
         .refine((file) => !file || ACCEPTED_IMAGE_TYPES.includes(file.type), {
             message: "Only .jpg, .jpeg, .png and .webp formats are supported",
         }),
-});
+}).partial();
 
 export type UpdateUserData = z.infer<typeof updateUserSchema>;
 

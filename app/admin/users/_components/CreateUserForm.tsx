@@ -85,7 +85,7 @@ export default function CreateUserForm() {
   return (
           <div>           
       <div className="p-4 flex items-center justify-between">
-        <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
+        <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
           Create User
         </h1>
 
@@ -127,7 +127,7 @@ export default function CreateUserForm() {
       </div>
 
       {/* Image Input */}
-      <Controller
+      {/* <Controller
         name="profilePhoto"
         control={control}
         render={({ field: { onChange } }) => (
@@ -138,6 +138,33 @@ export default function CreateUserForm() {
             onChange={(e) => handleImageChange(e.target.files?.[0], onChange)}
           />
         )}
+      /> */}
+      <Controller
+          name="profilePhoto"
+          control={control}
+          render={({ field: { onChange } }) => (
+          <>
+          {/* hidden file input */}
+          <input
+          ref={fileInputRef}
+          type="file"
+          accept=".jpg,.jpeg,.png,.webp"
+          className="hidden"
+          onChange={(e) =>
+          handleImageChange(e.target.files?.[0], onChange)
+        }
+        />
+        {/* styled button */}
+        <button
+        type="button"
+        onClick={() => fileInputRef.current?.click()}
+        className="h-11 px-6 rounded-full bg-gradient-to-r from-[#D07522] to-[#F4AE6F] text-white font-medium shadow-md hover:opacity-90 active:scale-[0.97] transition-all "
+        // className="text-sm text-gray-500 file:border file:border-gray-300 file:rounded-lg file:px-3 file:py-2 file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
+        >
+           Choose Image
+        </button>
+        </>
+            )}
       />
       {errors.profilePhoto && (
         <p className="text-sm text-red-600">{errors.profilePhoto.message}</p>

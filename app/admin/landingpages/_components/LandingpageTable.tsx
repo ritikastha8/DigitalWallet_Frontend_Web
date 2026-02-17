@@ -92,7 +92,7 @@ const LandingPageTable = ({ landingpages, pagination, search }: { landingpages: 
     <div className="mt-6 border border-gray-200 rounded-lg overflow-hidden bg-white">
       {/* Manage LandingPages Title */}
       <div className="p-4 flex items-center justify-between">
-        <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
+        <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
           Manage Landing Pages
         </h1>
 
@@ -120,7 +120,7 @@ const LandingPageTable = ({ landingpages, pagination, search }: { landingpages: 
             className="pl-10 pr-4 py-2 w-full border rounded-md border-gray-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 font-inter font-medium text-gray-700"
           />
         </div>
-        <button onClick={handleSearchChange} className="px-4 py-2 bg-orange-400 text-white rounded-md hover:bg-orange-400 font-inter font-medium">
+        <button onClick={handleSearchChange} className="px-4 py-2 bg-[#D07522] text-white rounded-md hover:bg-orange-400 font-inter font-medium">
           Search
         </button>
       </div>

@@ -53,7 +53,7 @@ export default function CreateTermsConditionForm() {
   return (
     <div>           
       <div className="p-4 flex items-center justify-between">
-        <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
+        <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
           Create Terms & Condition
         </h1>
 

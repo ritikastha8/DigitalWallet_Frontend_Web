@@ -93,7 +93,7 @@ const TermsConditionTable = ({ termsconditions, pagination, search }: { termscon
     <div className="mt-6 border border-gray-200 rounded-lg overflow-hidden bg-white">
       {/* Manage TermsConditions Title */}
       <div className="p-4 flex items-center justify-between">
-        <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
+        <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
           Manage Terms Conditions
         </h1>
 

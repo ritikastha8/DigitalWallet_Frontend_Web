@@ -78,7 +78,7 @@ export default function CreateLandingPageForm() {
   return (
         <div>           
       <div className="p-4 flex items-center justify-between">
-        <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
+        <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
           Create Landing Page
         </h1>
 
@@ -89,7 +89,7 @@ export default function CreateLandingPageForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-6">
 
       {/* Image */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         {previewImage ? (
           <div className="relative w-24 h-24">
             <img
@@ -116,21 +116,72 @@ export default function CreateLandingPageForm() {
             No Image
           </div>
         )}
+      </div> */}
+      <div className="flex items-center gap-4 mb-4">
+  {/* Image Preview */}
+  <div className="relative w-36 h-36">
+    {previewImage ? (
+      <img
+        src={previewImage}
+        alt="Preview"
+        className="w-36 h-36 rounded-lg object-cover"
+      />
+    ) : (
+      <div className="w-36 h-36 bg-gray-300 rounded-lg flex items-center justify-center">
+        No Image
       </div>
+    )}
 
-      {/* Image Input */}
+    {/* Dismiss button */}
+    {previewImage && (
       <Controller
         name="imageLandpage"
         control={control}
         render={({ field: { onChange } }) => (
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".jpg,.jpeg,.png,.webp"
-            onChange={(e) => handleImageChange(e.target.files?.[0], onChange)}
-          />
+          <button
+            type="button"
+            onClick={() => handleDismissImage(onChange)}
+            className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
+          >
+            ✕
+          </button>
         )}
       />
+    )}
+  </div>
+
+ 
+</div>
+
+
+     
+      <Controller
+                 name="imageLandpage"
+                 control={control}
+                 render={({ field: { onChange } }) => (
+                 <>
+                  {/* hidden file input */}
+                  <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.webp"
+                  className="hidden"
+                  onChange={(e) =>
+                    handleImageChange(e.target.files?.[0], onChange)
+                }
+                />
+                {/* styled button */}
+                <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="h-11 px-6 rounded-full bg-gradient-to-r from-[#D07522] to-[#F4AE6F] text-white font-medium shadow-md hover:opacity-90 active:scale-[0.97] transition-all "
+                // className="text-sm text-gray-500 file:border file:border-gray-300 file:rounded-lg file:px-3 file:py-2 file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
+                >
+                    Choose Image
+                </button>
+                </>
+            )}
+            />
       {errors.imageLandpage && (
         <p className="text-sm text-red-600">{errors.imageLandpage.message}</p>
       )}

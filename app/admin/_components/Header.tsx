@@ -38,7 +38,14 @@ export default function Header() {
                     <div className="hidden md:flex items-center gap-6 justify-self-center">
                         
                     </div>
-
+                      {/* <button
+                                onClick={handleLogout}
+                                className=" h-9 px-3 inline-flex items-center justify-center rounded-md bg-[#D07522] dark:bg-[#A65F1A]
+                                 text-white border border-black/10 dark:border-white/15 text-m font-medium hover:bg-[#c6681d] dark:hover:bg-[#955013]transition-colors
+          "
+                            >
+                                Logout
+                            </button> */}
                     {/* Right: Auth + Mobile Toggle */}
                     <div className="flex items-center gap-2 md:justify-self-end">
                         <div className="hidden sm:flex items-center gap-2">
@@ -51,7 +58,7 @@ export default function Header() {
                         </div>
 
                         {/* Theme toggle */}
-                        <ThemeToggle />
+                        {/* <ThemeToggle /> */}
 
                         {/* Mobile hamburger */}
                         <button

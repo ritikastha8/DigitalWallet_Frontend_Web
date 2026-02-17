@@ -95,7 +95,7 @@ const NotificationTable = ({ notifications, pagination, search }: { notification
     <div className="mt-6 border border-gray-200 rounded-lg overflow-hidden bg-white">
       {/* Manage Notifications Title */}
       <div className="p-4 flex items-center justify-between">
-        <h1 className="font-sans text-gray-600 font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
+        <h1 className="font-sans text-[#D07522] font-semibold text-4xl" style={{ fontFamily: 'Nunito Sans' }}>
           Manage Notifications
         </h1>
 
