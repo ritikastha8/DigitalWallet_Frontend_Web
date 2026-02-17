@@ -1,3 +1,4 @@
+"use client";
 import CreateLandingPageForm from "../_components/CreateLandingpageForm";
 
 

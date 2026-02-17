@@ -1,3 +1,4 @@
+"use client";
 import CreateTermsConditionForm from "../_components/CreateTermsconditionForm";
 
 
