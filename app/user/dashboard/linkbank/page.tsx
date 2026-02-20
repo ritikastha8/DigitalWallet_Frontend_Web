@@ -5,6 +5,36 @@ import Link from "next/link";
 import { linkBank } from "@/lib/api/user/wallet";
 import { useRouter } from "next/navigation";
 
+const NEPAL_BANKS = [
+  "Agricultural Development Bank Ltd.",
+  "Citizens Bank International Ltd.",
+  "Everest Bank Ltd.",
+  "Excel Development Bank Ltd.",
+  "Garima Development Bank Ltd.",
+  "Goodwill Finance Ltd.",
+  "Guheswori Merchant Bank & Finance Ltd.",
+  "ICFC Finance Ltd.",
+  "Jyoti Bikas Bank Ltd.",
+  "Kamana Sewa Bikas Bank Ltd.",
+  "Laxmi Sunrise Bank Ltd.",
+  "Machhapuchchhre Bank Ltd.",
+  "Mahalaxmi Bikas Bank Ltd.",
+  "Miteri Development Bank Ltd.",
+  "Muktinath Bikas Bank Ltd.",
+  "Nabil Bank Ltd.",
+  "Nepal Bank Ltd.",
+  "Nepal Investment Mega Bank Ltd.",
+  "Pokhara Finance Ltd.",
+  "Prabhu Bank Ltd.",
+  "Prime Commercial Bank Ltd.",
+  "Progressive Finance Ltd.",
+  "Reliance Finance Ltd.",
+  "Shangrila Bikas Bank Ltd.",
+  "Shine Resunga Development Bank Ltd.",
+  "Siddhartha Bank Ltd.",
+  "Sindhu Bikas Bank Ltd.",
+].sort(); // Sorts alphabetically
+
 export default function LinkBankPage() {
   const router = useRouter();
   const [bankName, setBankName] = useState("");
@@ -45,14 +75,28 @@ export default function LinkBankPage() {
           {/* Bank Name */}
           <div className="mt-10">
             <label className="block text-[#D07522] font-medium mb-2">
-              Bank Name
+              Select Bank 
             </label>
-            <input
+            {/* <input
               type="text"
               value={bankName}
               onChange={(e) => setBankName(e.target.value)}
               className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
-            />
+            /> */}
+            {/*  select bank from dropdown*/}
+            <select
+              value={bankName}
+              onChange={(e) => setBankName(e.target.value)}
+              className={`h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522] bg-white ${
+              bankName ===""? " text-gray-400":"text-black"}`}
+            >
+              <option value="" disabled>-- Select your bank --</option>
+              {NEPAL_BANKS.map((bank) => (
+                <option key={bank} value={bank}>
+                  {bank}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Account Number */}

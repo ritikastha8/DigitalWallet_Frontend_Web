@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { loginBank } from "@/lib/api/user/wallet";
 import { useRouter } from "next/navigation";
+import { FiEye,FiEyeOff } from "react-icons/fi";
 
 export default function LinkLoginPage() {
   const router = useRouter();
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -49,13 +51,21 @@ export default function LinkLoginPage() {
             className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
           />
 
+          <div className="relative">
           <input
-            type="password"
+            type={showPassword ? "text":"password"}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
           />
+          <span
+              className="absolute right-3 top-2.5 text-gray-500 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+            </span>
+          </div>
 
           {error && <p className="text-red-500">{error}</p>}
 

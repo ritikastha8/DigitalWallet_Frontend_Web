@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { loadMoney } from "@/lib/api/user/wallet";
 
+import { useRouter } from "next/navigation";
 export default function LoadMoneyPage() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [amount, setAmount] = useState("");
@@ -10,6 +11,7 @@ export default function LoadMoneyPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +29,9 @@ export default function LoadMoneyPage() {
       setSuccess(`Wallet balance: NPR ${res.data.balance}`);
       setAmount("");
       setRemarks("");
+      setTimeout(() => {
+      router.push("/user/dashboard");
+      }, 400);
     } catch (err: any) {
       setError(err.message);
     } finally {
