@@ -101,3 +101,18 @@ export const getTransactions = async () => {
     throw new Error(error.response?.data?.message || error.message || "Failed to fetch transactions");
   }
 };
+
+// Get receive-money QR (for "My QR" / "Receive money" screen)
+export const getReceiveQr = async (amount?: number) => {
+  try {
+    const url = amount != null
+      ? `${API.USER.WALLET.RECEIVE_QR}?amount=${amount}`
+      : API.USER.WALLET.RECEIVE_QR;
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || error.message || "Failed to fetch receive QR"
+    );
+  }
+};

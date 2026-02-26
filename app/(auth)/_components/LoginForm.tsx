@@ -2,16 +2,20 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LoginData, loginSchema } from "../schema";
 import Link from "next/link";
 import { FiEye,FiEyeOff } from "react-icons/fi";
 import { useAuth } from "@/context/AuthContext";
 import { handleLogin } from "@/lib/actions/users/auth-action";
 
+const SAFE_FROM_PREFIXES = ["/pay", "/user/", "/admin"];
+
 export default function LoginForm() {
     const { setUser, setIsAuthenticated } = useAuth();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const from = searchParams.get("from");
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginData>({
         resolver: zodResolver(loginSchema),
@@ -37,14 +41,14 @@ export default function LoginForm() {
 
                     setUser(response.data); //  set the logged-in user
                      setIsAuthenticated(true); // mark as authenticated
-                    localStorage.setItem("token", response.data.token);
-                    localStorage.setItem("userId", response.data._id);
 
                     if (response.data?.role == 'admin') {
-                        return router.replace("/admin");
+                        const goTo = from && SAFE_FROM_PREFIXES.some((p) => from.startsWith(p)) ? from : "/admin";
+                        return router.replace(goTo);
                     }
                     if (response.data?.role === 'user') {
-                        return router.replace("/user/dashboard");
+                        const goTo = from && SAFE_FROM_PREFIXES.some((p) => from.startsWith(p)) ? from : "/user/dashboard";
+                        return router.replace(goTo);
                     }
                     return router.replace("/");
                 } else {

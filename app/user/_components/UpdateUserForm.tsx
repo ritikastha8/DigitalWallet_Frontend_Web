@@ -50,7 +50,7 @@ useEffect(() => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const profileImageUrl = user?.imageUrl
-    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.imageUrl}`
+    ? user.imageUrl
     : null;
 
   const handleImageChange = (file: File | undefined, onChange: (file: File | undefined) => void) => {

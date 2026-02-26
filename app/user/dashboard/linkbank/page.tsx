@@ -110,7 +110,8 @@ export default function LinkBankPage() {
               onChange={(e) =>
                 setAccountNumber(e.target.value.replace(/\D/g, ""))
               }
-              className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
+              placeholder="Enter account number"
+              className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm text-black outline-none focus:border-[#D07522]"
             />
           </div>
 

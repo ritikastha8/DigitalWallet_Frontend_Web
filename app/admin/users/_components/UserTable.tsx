@@ -144,7 +144,7 @@ const UserTable = ({ users, pagination, search }: { users: any[], pagination: an
             <tr key={user._id} className="hover:bg-gray-50 font-inter font-medium text-gray-700">
               <td className="px-4 py-2">
                 {user.imageUrl ? (
-                  <Image src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.imageUrl}`} width={60} height={60} className="rounded-full" alt="User" />
+                  <Image src={user.imageUrl} width={60} height={60} className="rounded-full" alt="User" />
                 ) : (
                        <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#F4AE6F] text-2xl font-bold text-white">
                       {user.name.charAt(0).toUpperCase()}

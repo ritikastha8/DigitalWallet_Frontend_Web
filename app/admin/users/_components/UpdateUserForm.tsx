@@ -131,7 +131,7 @@ export default function UpdateUserForm(
                         user.imageUrl ? (
                             <div className="relative w-24 h-24">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.imageUrl}`}
+                                    src={user.imageUrl}
                                     alt="Profile Image"
                                     className="w-24 h-24 rounded-full object-cover"
                                     width={96}

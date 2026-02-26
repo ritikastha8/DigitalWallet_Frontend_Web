@@ -1,5 +1,6 @@
 import { handleGetOneLandingPage } from "@/lib/actions/admin/landingpage-action";
 import UpdateLandingPageForm from "../../_components/UpdateLandingpageForm";
+import { notFound } from "next/navigation";
 
 
 export default async function Page({
@@ -11,8 +12,8 @@ export default async function Page({
 
     const response = await handleGetOneLandingPage(id);
 
-    if (!response.success) {
-        throw new Error(response.message || 'Failed to load landing page');
+    if (!response.success || !response.data) {
+        notFound();
     }
 
     return (

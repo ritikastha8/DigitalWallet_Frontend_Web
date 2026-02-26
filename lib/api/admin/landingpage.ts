@@ -1,5 +1,6 @@
 import { API } from "../endpoints";
 import axios from "../axios";
+import { normalizeLandingPage, normalizeLandingPages } from "@/lib/utils/landingpage-normalize";
 
 export const  createLandingPage= async (landingpageData: any) => {
     try {
@@ -12,7 +13,8 @@ export const  createLandingPage= async (landingpageData: any) => {
                 }
             }
         );
-        return response.data;
+        const payload = response.data;
+        return { ...payload, data: normalizeLandingPage(payload?.data) };
     } catch (error: Error | any) {
         throw new Error(error.response?.data?.message
             || error.message || 'Create landing page failed');
@@ -23,7 +25,8 @@ export const getLandingPageById = async (id: string) => {
         const response = await axios.get(
             API.ADMIN.LANDINGPAGE.GET_ONE(id)
         );
-        return response.data;
+        const payload = response.data;
+        return { ...payload, data: normalizeLandingPage(payload?.data) };
     }
     catch (error: Error | any) {
         throw new Error(error.response?.data?.message
@@ -41,7 +44,11 @@ export const getAllLandingPages = async (
                 params: { page, size, search }
             }
         );
-        return response.data;
+        const payload = response.data;
+        return {
+            ...payload,
+            data: normalizeLandingPages(payload?.data || []),
+        };
     } catch (error: Error | any) {
         throw new Error(error.response?.data?.message
             || error.message || 'Get all landing pages failed');
@@ -59,7 +66,8 @@ export const updateLandingPage = async (id: string, updateData: any) => {
                 }
             }
         );
-        return response.data;
+        const payload = response.data;
+        return { ...payload, data: normalizeLandingPage(payload?.data) };
     }
     catch (error: Error | any) {
         throw new Error(error.response?.data?.message

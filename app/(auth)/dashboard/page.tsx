@@ -1,9 +1,5 @@
-"use client"; // only if you use hooks
+import { redirect } from "next/navigation";
 
-export default function DashboardPage() {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
-  );
+export default function AuthDashboardPage() {
+  redirect("/login");
 }

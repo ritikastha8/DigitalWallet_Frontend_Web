@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { handleGetOneLandingPage } from "@/lib/actions/admin/landingpage-action";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,9 +10,10 @@ export default async function Page({
 }) {
     const { id } = await params;
     const response = await handleGetOneLandingPage(id);
-    if (!response.success) {
-        throw new Error(response.message || 'Failed to load landing page');
+    if (!response.success || !response.data) {
+        notFound();
     }
+    const landingPage = response.data?._doc ?? response.data;
 
     return (
         <div>
@@ -38,7 +40,7 @@ export default async function Page({
     {/* <strong className="text-gray-700 text-lg">Landing Page Picture:</strong> */}
     {/* {response.data.imageLandpageurl ? (
       <Image
-        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${response.data.imageLandpageurl}`}
+        src={response.data.imageLandpageurl}
         width={100}      // make image bigger
         height={100}     // make image bigger
         className="rounded-md object-cover"
@@ -57,7 +59,7 @@ export default async function Page({
   {/* <div className="w-[180px] h-[180px] flex-shrink-0">
     {response.data.imageLandpageurl ? (
       <Image
-        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${response.data.imageLandpageurl}`}
+        src={response.data.imageLandpageurl}
         width={180}
         height={180}
         className="rounded-lg object-cover w-full h-full"
@@ -102,9 +104,9 @@ export default async function Page({
   {/* Profile Picture row */}
   <div className="flex items-center gap-4">
     <strong className="text-lg">Landing Page Picture:</strong>
-    {response.data.imageLandpageurl ? (
+    {landingPage.imageLandpageurl ? (
       <Image
-        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${response.data.imageLandpageurl}`}
+        src={landingPage.imageLandpageurl}
         width={100}      // make image bigger
         height={100}     // make image bigger
         className="rounded-lg object-cover"
@@ -119,12 +121,12 @@ export default async function Page({
 
    {/* Heading */}
   <p className="text-lg">
-    <strong className="mr-2">Heading:</strong> {response.data.heading}
+    <strong className="mr-2">Heading:</strong> {landingPage.heading}
   </p>
 
    {/* Description */}
   <p className="text-lg">
-    <strong className="mr-2">Description:</strong> {response.data.describe}
+    <strong className="mr-2">Description:</strong> {landingPage.describe}
   </p>
 
 </div>

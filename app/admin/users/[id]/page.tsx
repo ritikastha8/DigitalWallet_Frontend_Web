@@ -32,7 +32,7 @@ export default async function Page({
     <strong className="text-lg">Profile Picture:</strong>
     {response.data.imageUrl ? (
       <Image
-        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${response.data.imageUrl}`}
+        src={response.data.imageUrl}
         width={80}      // make image bigger
         height={80}     // make image bigger
         className="rounded-full object-cover"

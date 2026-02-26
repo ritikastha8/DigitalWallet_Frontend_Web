@@ -58,7 +58,7 @@ export default function Header() {
                         </div>
 
                         {/* Theme toggle */}
-                        {/* <ThemeToggle /> */}
+                        <ThemeToggle />
 
                         {/* Mobile hamburger */}
                         <button

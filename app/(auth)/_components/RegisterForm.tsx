@@ -38,7 +38,6 @@ export default function RegisterForm() {
               setError(err.message || 'Registration failed');
       }
      });
-        console.log("register", data);
   };
 
   return (
@@ -48,13 +47,13 @@ export default function RegisterForm() {
 
       {/* Full Name */}
       <div className="space-y-1">
-        <label className="text-sm font-medium" htmlFor="name">Full Name</label>
+        <label className="text-sm font-medium text-gray-900" htmlFor="name">Full Name</label>
         <input
           id="name"
           type="text"
           autoComplete="name"
           placeholder="Enter your full name"
-          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
+          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm text-gray-900 outline-none focus:border-[#D07522]"
           {...register("name")}
         />
         {errors.name && <p className="text-xs text-red-600">{errors.name.message}</p>}
@@ -62,7 +61,7 @@ export default function RegisterForm() {
 
       {/* Mobile Number */}
       <div className="space-y-1">
-        <label className="text-sm font-medium" htmlFor="mobileNumber">Mobile Number</label>
+        <label className="text-sm font-medium text-gray-900" htmlFor="mobileNumber">Mobile Number</label>
         <input
           id="mobileNumber"
           type="tel"
@@ -70,7 +69,7 @@ export default function RegisterForm() {
           maxLength={10}
           autoComplete="tel"
           placeholder="Enter your mobile number"
-          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
+          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm text-gray-900 outline-none focus:border-[#D07522]"
           {...register("mobileNumber")}
           onInput={(e)=>{
             e.currentTarget.value = e.currentTarget.value.replace(/\D/g,"");
@@ -82,25 +81,25 @@ export default function RegisterForm() {
 
        {/* Email Address */}
       <div className="space-y-1">
-        <label className="text-sm font-medium" htmlFor="email">Email Address</label>
+        <label className="text-sm font-medium text-gray-900" htmlFor="email">Email Address</label>
         <input
           id="email"
           type="email"
           autoComplete="email"
           placeholder="Enter your email address"
-          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522]"
+          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm text-gray-900 outline-none focus:border-[#D07522]"
           {...register("email")}
         />
         {errors.email && <p className="text-xs text-red-600">{errors.email.message}</p>}
       </div>
             {/* Password */}
       <div className="space-y-1 relative">
-        <label className="text-sm font-medium" htmlFor="password">Password</label>
+        <label className="text-sm font-medium text-gray-900" htmlFor="password">Password</label>
         <input
           id="password"
           type={showPassword ? "text" : "password"}
           placeholder="Enter your password"
-          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522] pr-10"
+          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm text-gray-900 outline-none focus:border-[#D07522] pr-10"
           {...register("password")}
         />
         <span
@@ -114,12 +113,12 @@ export default function RegisterForm() {
 
      {/* Confirm Password */}
       <div className="space-y-1 relative">
-        <label className="text-sm font-medium" htmlFor="confirmPassword">Confirm Password</label>
+        <label className="text-sm font-medium text-gray-900" htmlFor="confirmPassword">Confirm Password</label>
         <input
           id="confirmPassword"
           type={showConfirmPassword ? "text" : "password"}
           placeholder="Enter your Confirm password"
-          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[#D07522] pr-10"
+          className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm text-gray-900 outline-none focus:border-[#D07522] pr-10"
           {...register("confirmPassword")}
         />
         <span
@@ -139,7 +138,7 @@ export default function RegisterForm() {
     {...register("terms")}
     className="h-4 w-4 rounded border-gray-300 focus:ring-[#D07522]"
   />
-  <label htmlFor="terms" className="text-sm text-gray-700">
+  <label htmlFor="terms" className="text-sm text-gray-900">
   I agree to the{" "}
   <Link href="/terms" className="text-[#D07522] underline" target="_blank">
     Terms & Conditions
@@ -159,7 +158,7 @@ export default function RegisterForm() {
       </button>
 
       {/* Login link */}
-      <p className="text-center text-sm">
+      <p className="text-center text-sm text-gray-900">
         Already have an account? <Link href="/login" className="text-[#D07522] font-semibold hover:underline">Log In</Link>
       </p>
     </form>

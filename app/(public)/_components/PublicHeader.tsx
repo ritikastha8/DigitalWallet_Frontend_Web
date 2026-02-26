@@ -59,7 +59,7 @@ export default function PublicHeader() {
             )}
              
 
-            {/* <ThemeToggle /> */}
+            <ThemeToggle />
           </div>
 
         </div>

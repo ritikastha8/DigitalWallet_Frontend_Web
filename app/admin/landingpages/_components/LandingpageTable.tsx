@@ -8,6 +8,21 @@ import { handleDeleteLandingPage } from "@/lib/actions/admin/landingpage-action"
 import DeleteModal from "@/app/_components/DeleteModal";
 import { FiEye, FiEdit, FiTrash2, FiSearch } from "react-icons/fi";
 
+const normalizeLandingPage = (lp: any): any => lp?._doc ?? lp;
+
+const getLandingPageId = (lp: any): string | null => {
+  const normalized = normalizeLandingPage(lp);
+  const rawId = normalized?._id ?? lp?._id;
+  if (typeof rawId === "string" && rawId.trim()) return rawId;
+  if (rawId && typeof rawId === "object" && typeof rawId.$oid === "string") return rawId.$oid;
+  const fromToString = rawId?.toString?.();
+  if (fromToString && fromToString !== "[object Object]") return fromToString;
+  return null;
+};
+
+const getLandingPageKey = (lp: any, index: number): string =>
+  getLandingPageId(lp) ?? `landingpage-${index}`;
+
 const LandingPageTable = ({ landingpages, pagination, search }: { landingpages: any[], pagination: any, search?: string }) => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState(search || '');
@@ -136,35 +151,43 @@ const LandingPageTable = ({ landingpages, pagination, search }: { landingpages: 
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 text-gray-700">
-          {landingpages.map(landingpage => (
-            <tr key={landingpage._id} className="hover:bg-gray-50 font-inter font-medium text-gray-700">
+          {landingpages.map((landingpage, index) => (
+            <tr key={getLandingPageKey(landingpage, index)} className="hover:bg-gray-50 font-inter font-medium text-gray-700">
               <td className="px-4 py-2">
-                {landingpage.imageLandpageurl ? (
-                  <Image src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${landingpage.imageLandpageurl}`} width={60} height={60} className="rounded-md object-cover" alt="Landing Page" />
+                {normalizeLandingPage(landingpage).imageLandpageurl ? (
+                  <Image src={normalizeLandingPage(landingpage).imageLandpageurl} width={60} height={60} className="rounded-md object-cover" alt="Landing Page" />
                 ) : (
                   <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 text-sm">N/A</div>
                 )}
               </td>
-              <td className="px-4 py-2">{landingpage.heading}</td>
-              <td className="px-4 py-2">{landingpage.describe}</td>
+              <td className="px-4 py-2">{normalizeLandingPage(landingpage).heading || "-"}</td>
+              <td className="px-4 py-2">{normalizeLandingPage(landingpage).describe || "-"}</td>
               <td className="px-4 py-2 flex items-center gap-4">
+                {(() => {
+                  const landingPageId = getLandingPageId(landingpage);
+                  if (!landingPageId) {
+                    return (
+                      <span className="text-xs text-red-500">Invalid ID</span>
+                    );
+                  }
 
-
-                 {/* View */}
-                 <Link href={`/admin/landingpages/${landingpage._id}`} className="flex flex-col items-center gap-1">
-                 <FiEye className="text-gray-500 text-lg" />
-                 <span className="text-green-600 text-xs">View</span>
-                 </Link>
-                 {/* Edit */}
-                 <Link href={`/admin/landingpages/${landingpage._id}/edit`} className="flex flex-col items-center gap-1">
-                 <FiEdit className="text-gray-500 text-lg" />
-                 <span className="text-blue-500 text-xs">Edit</span>
-                 </Link>
-                {/* Delete */}
-                <div className="flex flex-col items-center gap-1 cursor-pointer" onClick={() => setDeleteId(landingpage._id)}>
-                  <FiTrash2 className="text-gray-500 text-lg" />
-                  <span className="text-red-500 text-xs">Delete</span>
-                </div>
+                  return (
+                    <>
+                      <Link href={`/admin/landingpages/${landingPageId}`} className="flex flex-col items-center gap-1">
+                        <FiEye className="text-gray-500 text-lg" />
+                        <span className="text-green-600 text-xs">View</span>
+                      </Link>
+                      <Link href={`/admin/landingpages/${landingPageId}/edit`} className="flex flex-col items-center gap-1">
+                        <FiEdit className="text-gray-500 text-lg" />
+                        <span className="text-blue-500 text-xs">Edit</span>
+                      </Link>
+                      <div className="flex flex-col items-center gap-1 cursor-pointer" onClick={() => setDeleteId(landingPageId)}>
+                        <FiTrash2 className="text-gray-500 text-lg" />
+                        <span className="text-red-500 text-xs">Delete</span>
+                      </div>
+                    </>
+                  );
+                })()}
               </td>
             </tr>
           ))}

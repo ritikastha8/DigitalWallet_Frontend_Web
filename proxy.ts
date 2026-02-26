@@ -1,51 +1,45 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getAuthToken, getUserData } from "./lib/cookie";
-import path from "path";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-const publicPaths = ["/login", "/register", "/forget-password",'/reset-password'];
-const adminPaths = ["/admin"];
-const userPaths = ['/user'];
+const AUTH_PATHS = ["/login", "/register", "/forget-password", "/pinsetup"];
+const AUTH_PATH_PREFIX = "/reset-password";
 
-export async function proxy(req: NextRequest) {
-    const { pathname } = req.nextUrl;
+export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const token = request.cookies.get("auth_token")?.value;
 
-    const token = await getAuthToken();
-    const user = token ? await getUserData() : null;
+  const isProtectedUser = pathname.startsWith("/user");
+  const isProtectedAdmin = pathname.startsWith("/admin");
+  const isProtectedPay = pathname === "/pay";
+  const isProtected = isProtectedUser || isProtectedAdmin || isProtectedPay;
 
-    const isPublicPath = publicPaths.some(path => pathname.startsWith(path));
-    
-    const isAdminPath = adminPaths.some(path=> pathname.startsWith(path));
+  const isAuthPath =
+    AUTH_PATHS.some((p) => pathname === p) ||
+    pathname.startsWith(AUTH_PATH_PREFIX);
 
-    const isUserPath = userPaths.some(path=>pathname.startsWith(path));
-    if (!token && !isPublicPath){
-        return NextResponse.redirect(new URL("/login",req.url));
-    }
-    if(user && token){
-        if(isAdminPath && user.role !== 'admin'){
-            return NextResponse.redirect(new URL("/", req.url));
-        }
-         if(isUserPath && user.role !== 'user' && user.role !=='admin'){
-            return NextResponse.redirect(new URL('/', req.url));
-        }
-    }
-     // if (pathname=="/login"){
-    //     return NextResponse.redirect(new URL("/",req.url));
-    // }
-    if (isPublicPath && token) {
-        return NextResponse.redirect(new URL("/", req.url));
-    }
+  if (isProtected && !token) {
+    const loginUrl = new URL("/login", request.url);
+    const from = pathname + request.nextUrl.search;
+    loginUrl.searchParams.set("from", from);
+    return NextResponse.redirect(loginUrl);
+  }
 
-    return NextResponse.next(); // continue/granted
+  if (isAuthPath && token) {
+    return NextResponse.redirect(new URL("/user/dashboard", request.url));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-    matcher: [
-        "/admin/:path*",
-        "/user/:path*",
-        "/login",
-        "/register"
-    ]
-}
-// matcher - which path to apply proxy logic
-
-
+  matcher: [
+    "/user/:path*",
+    "/admin/:path*",
+    "/pay",
+    "/login",
+    "/register",
+    "/forget-password",
+    "/pinsetup",
+    "/reset-password/:path*",
+  ],
+};

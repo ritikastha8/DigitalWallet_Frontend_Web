@@ -62,7 +62,21 @@ export const whoAmI = async () => {
     throw new Error(error.response?.data?.message
       || error.message || 'Whoami failed');
   }
-}
+};
+
+export type ThemeValue = "light" | "dark" | "system";
+
+export const updateTheme = async (theme: ThemeValue) => {
+  try {
+    const response = await axios.patch(API.AUTH.THEME, { theme });
+    return response.data as { success: boolean; data?: unknown; message?: string };
+  } catch (error: Error | any) {
+    throw new Error(
+      error.response?.data?.message || error.message || "Failed to update theme"
+    );
+  }
+};
+
 export const updateProfile = async (formData: FormData) => {
     try {
         const response = await axios.put(

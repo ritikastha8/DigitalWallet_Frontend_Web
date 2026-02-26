@@ -1,4 +1,5 @@
 "use client";
+import { useMemo, useState } from "react";
 import { Bell } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +7,22 @@ import ThemeToggle from "@/app/_components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { handleLogout } from "@/lib/actions/users/auth-action";
 export default function Header() {
-  const { user, isAuthenticated , logout} = useAuth();
+  const { user, isAuthenticated } = useAuth();
+  const [avatarFailed, setAvatarFailed] = useState(false);
+
+  const displayName = (user?.name?.trim?.() || user?.email?.trim?.() || "User") as string;
+  const initial = displayName.charAt(0).toUpperCase();
+
+  const profileImageUrl = useMemo(() => {
+    const rawUrl = user?.imageUrl;
+    if (!rawUrl || typeof rawUrl !== "string") return null;
+    if (/^https?:\/\//i.test(rawUrl)) return rawUrl;
+
+    const baseUrl =
+      process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:5052";
+    const normalizedPath = rawUrl.startsWith("/") ? rawUrl : `/${rawUrl}`;
+    return `${baseUrl}${normalizedPath}`;
+  }, [user?.imageUrl]);
 
   return (
     <header className="bg-[#484847]">
@@ -27,22 +43,23 @@ export default function Header() {
       {isAuthenticated && user ? (
       <div className="flex items-center gap-3">
       <Link href="/user/profile" className="flex items-center gap-2">
-        {user.imageUrl ? (
+        {profileImageUrl && !avatarFailed ? (
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.imageUrl}`}
-            alt={user.name}
+            src={profileImageUrl}
+            alt={displayName}
             width={32}
             height={32}
             className="rounded-full"
+            onError={() => setAvatarFailed(true)}
           />
         ) : (
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4AE6F] text-sm font-semibold text-white">
-            {user.name.charAt(0).toUpperCase()}
+            {initial}
           </div>
         )}
-        <span className="text-sm text-white font-medium">{user.name}</span>
+        <span className="text-sm text-white font-medium">{displayName}</span>
       </Link>
-      {/* <ThemeToggle /> */}
+      <ThemeToggle />
       </div>
       ) : (
       <div className="flex gap-3">

@@ -3,7 +3,7 @@
 import { LoginData, RegisterData, RegisterPinData } from "@/app/(auth)/schema"
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { login, register, requestPasswordReset, resetPassword, setPin, updateProfile, whoAmI } from "@/lib/api/user/auth";
+import { login, register, requestPasswordReset, resetPassword, setPin, updateProfile, updateTheme, whoAmI, type ThemeValue } from "@/lib/api/user/auth";
 import { clearAuthCookies, setAuthToken, setUserData } from "@/lib/cookie";
 
 export const handleRegister = async (data: RegisterData ) =>{
@@ -84,6 +84,22 @@ export async function handleWhoAmI() {
         return { success: false, message: result.message || 'Failed to fetch user data' };
     } catch (error: Error | any) {
         return { success: false, message: error.message };
+    }
+}
+
+export async function handleUpdateTheme(theme: ThemeValue) {
+    try {
+        const result = await updateTheme(theme);
+        if (result.success) {
+            const whoamiResult = await whoAmI();
+            if (whoamiResult.success && whoamiResult.data) {
+                await setUserData(whoamiResult.data);
+            }
+            return { success: true, message: "Theme updated successfully" };
+        }
+        return { success: false, message: result.message || "Failed to update theme" };
+    } catch (error: Error | any) {
+        return { success: false, message: error.message || "Could not save theme" };
     }
 }
 

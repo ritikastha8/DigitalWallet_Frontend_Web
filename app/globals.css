@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tailwind v4: class-based dark mode so theme toggle affects dark: utilities */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -19,8 +22,51 @@
   }
 }
 
+/* When theme is forced via class (ThemeToggle), override variables.
+   html.light is required so light mode wins over @media (prefers-color-scheme: dark). */
+html.light {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+html.light body,
+html.light [data-theme-bg] {
+  background-color: #ffffff !important;
+  color: #171717;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Input/textarea text and placeholder black across the entire app */
+input,
+textarea,
+select {
+  color: #000000;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #000000;
+  opacity: 1;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #000000;
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #000000;
+  opacity: 1;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #000000;
 }

@@ -1,7 +1,7 @@
 "use client";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { handleUpdateLandingPage } from "@/lib/actions/admin/landingpage-action";
@@ -11,16 +11,31 @@ import { LandingPageData, LandingPageSchema } from "../schema";
 export default function UpdateLandingPageForm(
     { landingpage }: { landingpage: any }
 ) {
+    const normalizedLandingPage = landingpage?._doc ?? landingpage;
     const router = useRouter();
+    const landingPageId =
+        typeof normalizedLandingPage?._id === "string"
+            ? normalizedLandingPage._id
+            : normalizedLandingPage?._id?.$oid || normalizedLandingPage?._id?.toString?.();
+
     const [pending, startTransition] = useTransition();
     const { register, handleSubmit, control, reset, formState: { errors, isSubmitting } } = useForm<Partial<LandingPageData>>({
         resolver: zodResolver(LandingPageSchema.partial()),
         defaultValues: {
-            heading: landingpage.heading || '',
-            describe: landingpage.describe || '',
+            heading: normalizedLandingPage.heading || '',
+            describe: normalizedLandingPage.describe || '',
             imageLandpage: undefined
         }
     });
+
+    useEffect(() => {
+        reset({
+            heading: normalizedLandingPage?.heading || "",
+            describe: normalizedLandingPage?.describe || "",
+            imageLandpage: undefined,
+        });
+    }, [normalizedLandingPage, reset]);
+
     const [error, setError] = useState<string | null>(null);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -60,7 +75,10 @@ export default function UpdateLandingPageForm(
                 if (data.imageLandpage) {
                     formData.append('imageLandpage', data.imageLandpage);
                 }
-                const response = await handleUpdateLandingPage(landingpage._id, formData);
+                if (!landingPageId || landingPageId === "[object Object]") {
+                    throw new Error("Invalid landing page id");
+                }
+                const response = await handleUpdateLandingPage(landingPageId, formData);
 
                 if (!response.success) {
                     throw new Error(response.message || 'Update profile failed');
@@ -119,10 +137,10 @@ export default function UpdateLandingPageForm(
                 ) :
 
                     (
-                        landingpage.imageLandpageurl ? (
+                        normalizedLandingPage.imageLandpageurl ? (
                             <div className="relative w-24 h-24">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${landingpage.imageLandpageurl}`}
+                                    src={normalizedLandingPage.imageLandpageurl}
                                     alt="Landing Page Image"
                                     className="w-24 h-24 rounded-lg object-cover"
                                     width={96}

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { handleWhoAmI } from "@/lib/actions/users/auth-action";
 import UpdateUserForm from "../_components/UpdateUserForm";
 
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
     const result = await handleWhoAmI();
