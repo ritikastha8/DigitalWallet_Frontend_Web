@@ -1,20 +1,26 @@
-# NovaCash – Digital Wallet Backend API
+# NovaCash – Digital Wallet Frontend
 
-NovaCash is a secure digital wallet backend system designed to support peer-to-peer financial transactions, wallet management, and administrative content control. This backend provides RESTful APIs for user authentication, wallet operations, transactions, notifications, and administrative management. It is built to support a cross-platform mobile application and follows a modular and scalable API-driven architecture.
+The NovaCash frontend is a web/mobile interface for users and admins to interact with the digital wallet system. It connects with the backend APIs to provide secure wallet operations, transactions, and content management.
 
 ## Tech Stack
 
-Framework: Next.js (API Routes)
+- Framework: Next.js (API Routes)
 
-Language: JavaScript / TypeScript
+- Framework / Library: React.js (or Next.js for SSR)
 
-Authentication: JWT-based authentication
+- Language: JavaScript / TypeScript
 
-Database: MongoDB (or equivalent NoSQL database)
+- State Management: Redux / Context API
 
-File Uploads: Multipart form data (profile photos, landing page images)
+- Routing: React Router / Next.js Routing
 
-Architecture: RESTful API with role-based access (Admin & User)
+- Styling: Tailwind CSS / CSS Modules / SCSS
+
+- HTTP Requests: Axios / Fetch API
+
+- Forms & Validation: React Hook Form / Zod
+
+- Authentication: JWT token stored in memory / localStorage
 
 ## Getting Started (Local Development)
 
@@ -34,111 +40,47 @@ http://localhost:3000
 
 ## Authentication & Authorization
 
-- JWT tokens are issued upon successful login
+- Users log in through the frontend login form.
 
-- Protected routes require an Authorization header:
-`Authorization: Bearer <JWT_TOKEN>`
+- On successful login, a JWT token is returned from the backend.
 
-- Admin routes are restricted to authorized admin users
+- The frontend stores the token in localStorage or memory.
 
-## API Routes Overview
-### Admin Routes
+- All protected API requests include the Authorization header: `Authorization: Bearer <JWT_TOKEN>`
 
-Base Path: /api/user/admin
-
-| Method | Endpoint             | Description                            |
-| ------ | -------------------- | -------------------------------------- |
-| POST   | /users               | Create a new user (with profile photo) |
-| GET    | /users               | Get all users                          |
-| GET    | /users/:id           | Get user by ID                         |
-| PUT    | /users/:id           | Update user by ID                      |
-| DELETE | /users/:id           | Delete user by ID                      |
-| POST   | /landingpages        | Create landing page                    |
-| PUT    | /landingpages/:id    | Update landing page                    |
-| GET    | /landingpages        | Get all landing pages                  |
-| GET    | /landingpages/:id    | Get landing page by ID                 |
-| DELETE | /landingpages/:id    | Delete landing page                    |
-| POST   | /notifications       | Create notification                    |
-| GET    | /notifications       | Get all notifications                  |
-| GET    | /notifications/:id   | Get notification by ID                 |
-| PUT    | /notifications/:id   | Update notification                    |
-| DELETE | /notifications/:id   | Delete notification                    |
-| POST   | /termsconditions     | Create terms & conditions              |
-| GET    | /termsconditions     | Get all terms                          |
-| GET    | /termsconditions/:id | Get terms by ID                        |
+- Admin-specific pages or operations are restricted to users with admin privileges.
 
 
-### User Routes
+## Frontend Pages & Components
 
-Base Path: /api/user
-
-| Method | Endpoint                      | Description                     |
-| ------ | ----------------------------- | ------------------------------- |
-| POST   | /auth/register                | Register new user               |
-| POST   | /auth/login                   | Login & receive JWT             |
-| GET    | /wallet/info                  | Get wallet balance & bank       |
-| POST   | /wallet/load                  | Load money into wallet          |
-| POST   | /wallet/topup                 | Top-up wallet                   |
-| POST   | /wallet/transfer              | Transfer money                  |
-| POST   | /wallet/link-bank             | Link bank account               |
-| POST   | /wallet/loginbank             | Bank login via wallet           |
-| GET    | /wallet/receive-qr            | Generate QR for receiving money |
-| GET    | /transactions/my-transactions | User transactions               |
-| POST   | /transactions/log             | Log transaction                 |
-| GET    | /transactions/:id             | Transaction by ID               |
-| PUT    | /transactions/:id             | Update transaction              |
-| DELETE | /transactions/:id             | Delete transaction              |
-| GET    | /notifications                | User notifications              |
-| GET    | /notifications/:id            | Notification by ID              |
-| GET    | /termsconditions              | Terms list                      |
-| GET    | /landingpages                 | Landing pages                   |
+| Page / Component      | Description                                         |
+| --------------------- | --------------------------------------------------- |
+| **Login**             | User login form                                     |
+| **Signup**            | User registration form                              |
+| **Dashboard**         | User wallet overview, balance, QR code for payments |
+| **Wallet Operations** | Load, Top-up, Transfer money                        |
+| **Transactions**      | View, log, update, delete user transactions         |
+| **Notifications**     | User notifications panel                            |
+| **Landing Pages**     | Display content managed by admin                    |
+| **Admin Panel**       | Create/edit users, landing pages, notifications     |
+| **Profile**           | View & update user profile, upload profile photo    |
 
 
-### Auth Routes
+## State Management
 
-Base Path: /api/user/auth
+- Protected routes redirect unauthorized users to login.
 
-| Method | Endpoint                | Description            |
-| ------ | ----------------------- | ---------------------- |
-| POST   | /register               | Register new user      |
-| POST   | /login                  | Login and get JWT      |
-| GET    | /whoami                 | Get logged-in user     |
-| PUT    | /upload-profile         | Upload profile photo   |
-| POST   | /request-password-reset | Request password reset |
-| POST   | /reset-password/:token  | Reset password         |
-
-
-### Public Routes
-
-Base Path: /api
-
-| Method | Endpoint         | Description               |
-| ------ | ---------------- | ------------------------- |
-| GET    | /landingpages    | Public landing pages      |
-| GET    | /notifications   | Public notifications      |
-| GET    | /termsconditions | Public terms & conditions |
+- Admin routes render components only for users with role: admin.
 
 
 ## Security Features
 
-- JWT-based authentication
-
-- Role-based access control (Admin/User)
-
-- Secure password hashing
-
-- Token-based password reset
-
-- Protected wallet and transaction operations
-
-## Purpose of This Backend
-
 This backend is designed to support:
 
-- A Flutter mobile application
+- JWT-based authentication
 
-- Secure wallet-based financial operations
+- Admin/user role-based access control
 
-- Admin-managed dynamic content
+- Protected routes in React using route guards / conditional rendering
 
-- Academic demonstration of backend architecture, security, and API design
+- Secure handling of tokens in frontend
