@@ -37,7 +37,7 @@ http://localhost:3000
 - JWT tokens are issued upon successful login
 
 - Protected routes require an Authorization header:
-Authorization: Bearer <JWT_TOKEN>
+`Authorization: Bearer <JWT_TOKEN>`
 
 - Admin routes are restricted to authorized admin users
 
