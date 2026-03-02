@@ -4,23 +4,23 @@ The NovaCash frontend is a web/mobile interface for users and admins to interact
 
 ## Tech Stack
 
-- Framework: Next.js (API Routes)
+- Framework: Next.js 
 
-- Framework / Library: React.js (or Next.js for SSR)
+- Framework / Library: Next.js for SSR
 
-- Language: JavaScript / TypeScript
+- Language: TypeScript
 
-- State Management: Redux / Context API
+- State Management: Redux 
 
-- Routing: React Router / Next.js Routing
+- Routing: Next.js Routing
 
 - Styling: Tailwind CSS / CSS Modules / SCSS
 
-- HTTP Requests: Axios / Fetch API
+- HTTP Requests: Axios 
 
 - Forms & Validation: React Hook Form / Zod
 
-- Authentication: JWT token stored in memory / localStorage
+- Authentication: JWT token stored in localStorage
 
 ## Getting Started (Local Development)
 
