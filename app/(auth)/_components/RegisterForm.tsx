@@ -140,7 +140,7 @@ export default function RegisterForm() {
   />
   <label htmlFor="terms" className="text-sm text-gray-900">
   I agree to the{" "}
-  <Link href="/terms" className="text-[#D07522] underline" target="_blank">
+  <Link href="/termsconditions" className="text-[#D07522] underline" target="_blank">
     Terms & Conditions
   </Link>
 </label>

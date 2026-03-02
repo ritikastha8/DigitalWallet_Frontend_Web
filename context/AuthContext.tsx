@@ -12,10 +12,7 @@ interface AuthContextProps {
     loading: boolean;
     checkAuth: () => Promise<void>;
 }
-
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
-
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState<any>(null);
